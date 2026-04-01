@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* THEME TOGGLE */
+        :root {
+            --home-bg: #ffffff;
+            --text-color: #111111;
+        }
+
+        [data-theme="dark"] {
+            --home-bg: #000000;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--home-bg) !important;
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] body,
+        [data-theme="dark"] p,
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4,
+        [data-theme="dark"] h5,
+        [data-theme="dark"] h6,
+        [data-theme="dark"] span,
+        [data-theme="dark"] li,
+        [data-theme="dark"] a,
+        [data-theme="dark"] label,
+        [data-theme="dark"] small,
+        [data-theme="dark"] strong {
+            color: #ffffff !important;
+        }
+
+        /* ---- HERO ---- */
+        .hero-about {
+            background-color: #000;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: "REDLINE";
+            position: absolute;
+            font-size: clamp(80px, 18vw, 260px);
+            font-weight: 900;
+            color: rgba(217, 4, 41, 0.05);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: -0.05em;
+        }
+
+        .diagonal-slash {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: #D90429;
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .diagonal-slash {
+                width: 100%;
+                height: 40%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+                top: unset;
+                bottom: 0;
+            }
+        }
+
+        /* ---- MARQUEE ---- */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 18s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ---- TIMELINE ---- */
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: -2rem;
+            width: 2px;
+            background: #e5e7eb;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            background: #D90429;
+            border: 3px solid #fff;
+            outline: 2px solid #D90429;
+        }
+
+        /* ---- TEAM CARD ---- */
+        .team-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(217,4,41,0.95) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .team-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .team-card img {
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover img {
+            transform: scale(1.06);
+        }
+
+        /* ---- VALUES CARD ---- */
+        .value-card {
+            border: 2px solid #000;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: #D90429;
+            transition: width 0.4s ease;
+        }
+
+        .value-card:hover::after {
+            width: 100%;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 8px 8px 0px #D90429;
+        }
+
+        /* ---- STAT COUNTER ---- */
+        .stat-block {
+            border-left: 4px solid #D90429;
+        }
+
+        /* ---- RIDE PHILOSOPHY ---- */
+        .philosophy-panel {
+            position: relative;
+        }
+
+        .philosophy-panel::before {
+            content: attr(data-num);
+            position: absolute;
+            top: -1.5rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(217,4,41,0.1);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* ---- SCROLL FADE IN ---- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- DARK MODE OVERRIDES ---- */
+        [data-theme="dark"] .hero-about {
+            background-color: #000;
+        }
+
+        [data-theme="dark"] .timeline-item::before {
+            background: #333;
+        }
+
+        [data-theme="dark"] .timeline-dot {
+            border-color: #000;
+        }
+
+        [data-theme="dark"] .value-card {
+            border-color: #fff;
+        }
+
+        [data-theme="dark"] .value-card:hover {
+            box-shadow: 8px 8px 0px #D90429;
+        }
+
+        [data-theme="dark"] .border-black {
+            border-color: #fff !important;
+        }
+
+        [data-theme="dark"] .bg-gray-50 {
+            background-color: #0a0a0a !important;
+        }
+
+        [data-theme="dark"] .bg-gray-100 {
+            background-color: #111 !important;
+        }
+
+        [data-theme="dark"] .text-gray-600 {
+            color: #aaa !important;
+        }
+
+        [data-theme="dark"] .text-gray-400 {
+            color: #666 !important;
+        }
+
+        [data-theme="dark"] .text-black {
+            color: #fff !important;
+        }
+
+        [data-theme="dark"] .bg-white {
+            background-color: #000 !important;
+        }
+
+        [data-theme="dark"] .border-gray-200 {
+            border-color: #222 !important;
+        }
+
+        [data-theme="dark"] .bg-black {
+            background-color: #fff !important;
+        }
+
+        [data-theme="dark"] .bg-black .text-white,
+        [data-theme="dark"] .bg-black h2,
+        [data-theme="dark"] .bg-black p {
+            color: #000 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="navbar"></div>
+<!-- HEROBANNER -->
+
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-zinc-950">
+  <div class="absolute inset-0 z-0">
+    <img src="images/bg3.jpg" 
+         class="w-full h-full object-cover opacity-40 grayscale" alt="Background">
+    <div class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+  </div>
+
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-[#D90429] opacity-10 hidden lg:block" 
+       style="clip-path: polygon(100% 0, 0% 100%, 100% 100%);"></div>
+
+  <div class="max-w-7xl mx-auto px-6 w-full relative z-10 py-20 lg:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <p class="text-[#D90429] uppercase tracking-[0.4em] font-semibold text-xs mb-6 flex items-center gap-3">
+          <span class="hidden lg:block w-8 h-[2px] bg-[#D90429]"></span>
+          Est. 2015 · Chennai, India
+          <span class="lg:hidden w-8 h-[2px] bg-[#D90429]"></span>
+        </p>
+        
+        <h1 class="italic text-white text-5xl md:text-7xl font-semibold uppercase tracking-tighter leading-[0.9]">
+          WE LIVE <br>FOR THE<br>
+          <span class="text-[#D90429] not-italic">RIDE.</span>
+        </h1>
+
+        <p class="mt-8 text-gray-300 text-base md:text-lg max-w-md leading-relaxed font-medium">
+          Redline Moto was born from a single obsession — pushing machines and riders to their absolute edge across India's most unforgiving terrain.
+        </p>
+      </div>
+
+      <div class="order-1 lg:order-2 relative px-4 lg:px-0">
+        <div class="relative z-10 aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-sm ring-1 ring-white/10 shadow-2xl">
+          <img src="images/bg3.jpg" alt="Founders"
+               class="w-full h-full object-cover transition-all duration-1000 scale-105 hover:scale-100" />
+          
+          <div class="absolute bottom-0 left-0 right-0 bg-zinc-950/95 p-6 backdrop-blur-sm border-t-4 border-[#D90429]">
+            <p class="text-white text-sm font-semibold uppercase tracking-wider italic">
+              "Every road is a test. <span class="text-[#D90429]">Pass it.</span>"
+            </p>
+            <p class="text-gray-500 text-[10px] mt-1 font-semibold uppercase tracking-widest">— Redline Moto Doctrine</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+    <!-- ============================================
+         OUR STORY — TIMELINE
+    ============================================ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+                <!-- Left -->
+                <div class="fade-up">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">How It Began</h3>
+                    <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none mb-8">
+                        OUR <span class="text-[#D90429]">STORY.</span>
+                    </h2>
+                    <p class="text-gray-600 text-base leading-relaxed font-semibold mb-6">
+                        Redline Moto started as a dare between two engineers who couldn't find an adventure tour that matched their expectations. So they built one from scratch.
+                    </p>
+                    <p class="text-gray-600 text-base leading-relaxed font-semibold mb-10">
+                        From a single bike and a hand-drawn map of the Spiti Valley, we've grown into India's most respected moto-adventure company — without ever compromising the spirit of the original ride.
+                    </p>
+                    <div class="relative overflow-hidden aspect-video">
+                        <img src="images/img8.jpg" alt="Redline Story" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-20 h-20 bg-[#D90429] flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                                <i class="bi bi-play-fill text-white text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Timeline -->
+                <div class="fade-up" style="transition-delay:0.2s">
+                    <div class="space-y-10">
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D90429] mb-1">2015</p>
+                            <h4 class="text-xl font-semibold uppercase text-black mb-2">The First Ride</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed font-semibold">Two bikes. One map. The Spiti Valley in the dead of winter. Redline Moto was born on a 900km dare that nearly killed us — and made us obsessed.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D90429] mb-1">2017</p>
+                            <h4 class="text-xl font-semibold uppercase text-black mb-2">The Fleet Grows</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed font-semibold">We acquired our first fleet of 8 BMWs and KTMs, partnered with Castrol and Metzeler, and launched our first commercial Himalayan crossing with 12 riders.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D90429] mb-1">2019</p>
+                            <h4 class="text-xl font-semibold uppercase text-black mb-2">International Routes</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed font-semibold">Expanded beyond India — Bhutan, Nepal, and Sri Lanka entered the Redline route book. Welcomed our 1000th rider.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D90429] mb-1">2022</p>
+                            <h4 class="text-xl font-semibold uppercase text-black mb-2">Redline Academy</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed font-semibold">Launched India's first ADV rider training program — technical off-road courses taught by ex-rally co-drivers and mountain rescue specialists.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D90429] mb-1">2025</p>
+                            <h4 class="text-xl font-semibold uppercase text-black mb-2">4000+ Riders Guided</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed font-semibold">Ten years. Fifteen routes. Zero fatalities. Still the same obsession that started it all. The trail never ends.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CORE VALUES
+    ============================================ -->
+
+<section class="py-24 bg-gray-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col items-center text-center mb-20">
+            <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4">What Drives Us</h3>
+            <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none max-w-4xl">
+                THE REDLINE <span class="text-[#D90429]">CODE.</span>
+            </h2>
+            <p class="mt-6 text-gray-500 text-sm md:text-base font-semibold uppercase tracking-widest max-w-2xl">
+                Four principles. No compromises. Every decision we make runs through this filter.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="group relative p-10 bg-white overflow-hidden transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="absolute inset-0 bg-[#D90429] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-start gap-6 mb-6">
+                        <div class="w-14 h-14 bg-[#D90429] group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                            <i class="bi bi-shield-fill-check text-white group-hover:text-[#D90429] text-2xl transition-colors duration-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-[#D90429] group-hover:text-white uppercase tracking-[0.3em] mb-1 transition-colors duration-500">01</p>
+                            <h4 class="text-2xl font-black uppercase tracking-tight text-black group-hover:text-white transition-colors duration-500">Safety First, Always</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-red-50 text-sm leading-relaxed font-semibold transition-colors duration-500">
+                        Adventure does not mean reckless. Every route is pre-ridden. Every bike is inspected daily. Our decade-long zero-fatality record is protocol.
+                    </p>
+                </div>
+            </div>
+
+            <div class="group relative p-10 bg-white overflow-hidden transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="absolute inset-0 bg-[#D90429] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                <div class="relative z-10">
+                    <div class="flex items-start gap-6 mb-6">
+                        <div class="w-14 h-14 bg-black group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                            <i class="bi bi-gear-wide-connected text-white group-hover:text-[#D90429] text-2xl transition-colors duration-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-[#D90429] group-hover:text-white uppercase tracking-[0.3em] mb-1">02</p>
+                            <h4 class="text-2xl font-black uppercase tracking-tight text-black group-hover:text-white">Machine Perfection</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-red-50 text-sm leading-relaxed font-semibold">
+                        We obsess over our fleet. Every bike is modified, tuned, and tested for specific terrain. If it isn't perfect, it doesn't leave the garage.
+                    </p>
+                </div>
+            </div>
+
+            <div class="group relative p-10 bg-white overflow-hidden transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="absolute inset-0 bg-[#D90429] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                <div class="relative z-10">
+                    <div class="flex items-start gap-6 mb-6">
+                        <div class="w-14 h-14 bg-[#D90429] group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                            <i class="bi bi-people-fill text-white group-hover:text-[#D90429] text-2xl transition-colors duration-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-[#D90429] group-hover:text-white uppercase tracking-[0.3em] mb-1">03</p>
+                            <h4 class="text-2xl font-black uppercase tracking-tight text-black group-hover:text-white">Brotherhood of Riders</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-red-50 text-sm leading-relaxed font-semibold">
+                        Every rider who joins becomes part of the tribe. We don't just move in convoy — we watch each other's backs and share the summit.
+                    </p>
+                </div>
+            </div>
+
+            <div class="group relative p-10 bg-white overflow-hidden transition-all duration-500 shadow-sm hover:shadow-2xl">
+                <div class="absolute inset-0 bg-[#D90429] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                <div class="relative z-10">
+                    <div class="flex items-start gap-6 mb-6">
+                        <div class="w-14 h-14 bg-black group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                            <i class="bi bi-globe-asia-australia text-white group-hover:text-[#D90429] text-2xl transition-colors duration-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-[#D90429] group-hover:text-white uppercase tracking-[0.3em] mb-1">04</p>
+                            <h4 class="text-2xl font-black uppercase tracking-tight text-black group-hover:text-white">Respect the Terrain</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-red-50 text-sm leading-relaxed font-semibold">
+                        Low-impact riding and local partnerships ensure the mountains are here for the next generation. We leave no trace behind.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- ============================================
+         TEAM SECTION
+    ============================================ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col items-center text-center mb-20 fade-up">
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4">The People Behind It</h3>
+                <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none max-w-4xl">
+                    MEET THE <span class="text-[#D90429]">CREW.</span>
+                </h2>
+                <p class="mt-6 text-gray-500 text-sm md:text-base font-semibold uppercase tracking-widest max-w-2xl">
+                    Ex-rally navigators, mountain rescue medics, and certified ADV instructors — every guide on our team has bled for this sport.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Team Member 1 -->
+                <div class="team-card fade-up" style="transition-delay:0s">
+                    <div class="aspect-[3/4] bg-gray-100 overflow-hidden relative">
+                        <img src="images/client2.avif" alt="Karthik Nair"
+                            class="w-full h-full object-cover" />
+                        <div class="overlay">
+                            <div>
+                                <p class="text-white text-xs font-semibold leading-relaxed">
+                                    "The mountains don't lie. Neither do I about my routes."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5 border-t-4 border-black mt-0">
+                        <h4 class="text-lg font-semibold uppercase tracking-tight text-black">Karthik Nair</h4>
+                        <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Co-Founder · Lead Guide</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">Himalayan</span>
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">Rally</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-card fade-up" style="transition-delay:0.1s">
+                    <div class="aspect-[3/4] bg-gray-100 overflow-hidden relative">
+                        <img src="images/client1.avif" alt="Priya Suresh"
+                            class="w-full h-full object-cover" />
+                        <div class="overlay">
+                            <div>
+                                <p class="text-white text-xs font-semibold leading-relaxed">
+                                    "Every rider I guide, I guide like it's their first and last ride."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5 border-t-4 border-[#D90429] mt-0">
+                        <h4 class="text-lg font-semibold uppercase tracking-tight text-black">Priya Suresh</h4>
+                        <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Co-Founder · Operations</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">Logistics</span>
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">Safety</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-card fade-up" style="transition-delay:0.2s">
+                    <div class="aspect-[3/4] bg-gray-100 overflow-hidden relative">
+                        <img src="images/client3.avif" alt="Dev Sharma"
+                            class="w-full h-full object-cover" />
+                        <div class="overlay">
+                            <div>
+                                <p class="text-white text-xs font-semibold leading-relaxed">
+                                    "A broken bike is a problem. A broken spirit is not allowed."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5 border-t-4 border-black mt-0">
+                        <h4 class="text-lg font-semibold uppercase tracking-tight text-black">Dev Sharma</h4>
+                        <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Head Mechanic</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">BMW</span>
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">KTM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-card fade-up" style="transition-delay:0.3s">
+                    <div class="aspect-[3/4] bg-gray-100 overflow-hidden relative">
+                        <img src="images/client4.avif" alt="Ananya Rajan"
+                            class="w-full h-full object-cover" />
+                        <div class="overlay">
+                            <div>
+                                <p class="text-white text-xs font-semibold leading-relaxed">
+                                    "Altitude sickness, fractures, dehydration — seen it all. Fixed it all."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5 border-t-4 border-[#D90429] mt-0">
+                        <h4 class="text-lg font-semibold uppercase tracking-tight text-black">Ananya Rajan</h4>
+                        <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Medical Officer · Guide</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">Medic</span>
+                            <span class="text-[10px] bg-gray-100 px-2 py-1 font-semibold uppercase text-gray-500">Rescue</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         NUMBERS IMPACT — DARK BAND
+    ============================================ -->
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-zinc-200">
+
+            <div class="p-10 border-b md:border-b-0 md:border-r border-zinc-200 fade-up transition-all duration-300">
+                <p class="text-[#D90429] text-[10px] font-semibold uppercase tracking-[0.3em] mb-4">Routes Active</p>
+                <h2 class="text-zinc-950 text-6xl font-semibold leading-none mb-2 tracking-tighter">15<span class="text-[#D90429] px-2">+</span></h2>
+                <p class="text-zinc-500 text-xs font-semibold uppercase tracking-widest leading-relaxed">Across South & <br>Central Asia</p>
+            </div>
+
+            <div class="p-10 border-b md:border-b-0 md:border-r border-zinc-200 fade-up transition-all duration-300" style="transition-delay:0.1s">
+                <p class="text-[#D90429] text-[10px] font-semibold uppercase tracking-[0.3em] mb-4">Riders Guided</p>
+                <h2 class="text-zinc-950 text-6xl font-semibold leading-none mb-2 tracking-tighter">4.2<span class="text-[#D90429] px-2">K</span></h2>
+                <p class="text-zinc-500 text-xs font-semibold uppercase tracking-widest leading-relaxed">From 38 <br>Countries</p>
+            </div>
+
+            <div class="p-10 border-b lg:border-b-0 lg:border-r border-zinc-200 fade-up transition-all duration-300" style="transition-delay:0.2s">
+                <p class="text-[#D90429] text-[10px] font-semibold uppercase tracking-[0.3em] mb-4">Km Covered</p>
+                <h2 class="text-zinc-950 text-6xl font-semibold leading-none mb-2 tracking-tighter">2.1<span class="text-[#D90429] px-2">M</span></h2>
+                <p class="text-zinc-500 text-xs font-semibold uppercase tracking-widest leading-relaxed">Total Collective <br>Kilometres</p>
+            </div>
+
+            <div class="p-10 fade-up transition-all duration-300" style="transition-delay:0.3s">
+                <p class="text-[#D90429] text-[10px] font-semibold uppercase tracking-[0.3em] mb-4">Safety Record</p>
+                <h2 class="text-zinc-950 text-6xl font-semibold leading-none mb-2 tracking-tighter">100<span class="text-[#D90429] px-2">%</span></h2>
+                <p class="text-zinc-500 text-xs font-semibold uppercase tracking-widest leading-relaxed">Zero Fatalities <br>Since 2015</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- ============================================
+         CERTIFICATIONS & PARTNERS
+    ============================================ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+                <!-- Left: Certifications -->
+                <div class="fade-up">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Credentials</h3>
+                    <h2 class="text-black text-4xl md:text-5xl font-semibold uppercase tracking-tighter leading-none mb-10">
+                        CERTIFIED &<br><span class="text-[#D90429]">TRUSTED.</span>
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-5 p-6 border-l-4 border-[#D90429] bg-gray-50">
+                            <div class="w-12 h-12 bg-[#D90429] flex items-center justify-center flex-shrink-0">
+                                <i class="bi bi-patch-check-fill text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold uppercase tracking-widest text-black">Ministry of Tourism Certified</h4>
+                                <p class="text-xs text-gray-500 font-semibold mt-1">Government of India · Adventure Tour Operator License</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5 p-6 border-l-4 border-black bg-gray-50">
+                            <div class="w-12 h-12 bg-black flex items-center justify-center flex-shrink-0">
+                                <i class="bi bi-heart-pulse-fill text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold uppercase tracking-widest text-black">Wilderness First Responder</h4>
+                                <p class="text-xs text-gray-500 font-semibold mt-1">All guides WFR certified · On-route medic protocol</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5 p-6 border-l-4 border-[#D90429] bg-gray-50">
+                            <div class="w-12 h-12 bg-[#D90429] flex items-center justify-center flex-shrink-0">
+                                <i class="bi bi-award-fill text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold uppercase tracking-widest text-black">ISO 9001:2015 Quality System</h4>
+                                <p class="text-xs text-gray-500 font-semibold mt-1">Standardized operations · Verified annual audits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Partners -->
+                <div class="fade-up" style="transition-delay:0.2s">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Partners & Sponsors</h3>
+                    <h2 class="text-black text-4xl md:text-5xl font-semibold uppercase tracking-tighter leading-none mb-10">
+                        WHO BACKS<br><span class="text-[#D90429]">US.</span>
+                    </h2>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-8 border-2 border-black flex items-center justify-center hover:border-[#D90429] transition-colors">
+                            <span class="text-2xl font-semibold uppercase tracking-tight text-black">Castrol</span>
+                        </div>
+                        <div class="p-8 border-2 border-black flex items-center justify-center hover:border-[#D90429] transition-colors">
+                            <span class="text-2xl font-semibold uppercase tracking-tight text-black">Metzeler</span>
+                        </div>
+                        <div class="p-8 border-2 border-black flex items-center justify-center hover:border-[#D90429] transition-colors">
+                            <span class="text-2xl font-semibold uppercase tracking-tight text-black">Akrapovic</span>
+                        </div>
+                        <div class="p-8 border-2 border-black flex items-center justify-center hover:border-[#D90429] transition-colors">
+                            <span class="text-2xl font-semibold uppercase tracking-tight text-black">GoPro</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-400 font-semibold uppercase tracking-widest mt-8">
+                        Interested in partnering?
+                        <a href="contact.html" class="text-black border-b border-black ml-1 hover:text-[#D90429] hover:border-[#D90429] transition-all">
+                            Let's Talk
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+                    }
+                }
+            }
+        }
+
+
+        // Scroll fade-in observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+     <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home1 - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+        <body class="font-sans">
+<section class="relative h-screen w-full flex items-center justify-center bg-black overflow-hidden">
+    
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1471479917193-f00955256257?q=80&w=2000&auto=format" 
+             alt="Dark Road" 
+             class="w-full h-full object-cover opacity-20 grayscale blur-sm scale-110">
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#D90429]/5 to-transparent bg-[length:100%_4px] animate-scanline"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-4xl px-6 text-center">
+        
+        <div class="relative inline-block mb-8">
+            <h1 class="text-[10rem] md:text-[18rem] font-semibold text-white leading-none tracking-tighter italic opacity-90 select-none">
+                404
+            </h1>
+            <h1 class="absolute inset-0 text-[10rem] md:text-[18rem] font-semibold text-[#D90429] leading-none tracking-tighter italic opacity-40 translate-x-1 translate-y-1 animate-pulse select-none">
+                404
+            </h1>
+        </div>
+
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-5xl font-semibold text-white uppercase tracking-tighter mb-4">
+                ENGINE <span class="text-[#D90429]">STALLED.</span>
+            </h2>
+            <p class="text-gray-500 font-semibold uppercase tracking-[0.3em] text-xs md:text-sm max-w-md mx-auto leading-relaxed">
+                You've reached the end of the trail. The coordinate you're looking for has been wiped from the logs.
+            </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <a href="index.html" class="group relative px-12 py-5 bg-[#D90429] text-white font-semibold uppercase tracking-[0.4em] text-[10px] overflow-hidden transition-all hover:bg-white hover:text-black">
+                <span class="relative z-10">Return To Home</span>
+                <div class="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+            </a>
+            
+            <a href="contact.html" class="px-12 py-5 border border-white/20 text-white font-semibold uppercase tracking-[0.4em] text-[10px] hover:border-[#D90429] hover:text-[#D90429] transition-all">
+                Report Failure
+            </a>
+        </div>
+
+    </div>
+
+    <div class="absolute top-10 left-10 hidden md:block">
+        <p class="text-[#D90429] font-semibold text-[10px] tracking-[0.5em] uppercase mb-1">Status: Lost</p>
+        <div class="w-32 h-[1px] bg-white/20"></div>
+    </div>
+
+</section>
+
+<style>
+    /* Subtle scanline animation to make the background look like a faulty monitor */
+    @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+    }
+    .animate-scanline {
+        animation: scanline 8s linear infinite;
+    }
+</style>
+</body>
+</head>
+</html>

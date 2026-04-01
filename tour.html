@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tours - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── THEME ───────────────────────────────────── */
+        :root { --home-bg:#ffffff; --text-color:#111111; }
+        [data-theme="dark"] { --home-bg:#000000; --text-color:#ffffff; }
+
+        body {
+            background-color: var(--home-bg) !important;
+            color: var(--text-color);
+            transition: background-color .4s ease, color .4s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card { background-color:#000 !important; }
+
+        [data-theme="dark"] body,[data-theme="dark"] p,[data-theme="dark"] h1,
+        [data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4,
+        [data-theme="dark"] h5,[data-theme="dark"] h6,[data-theme="dark"] span,
+        [data-theme="dark"] li,[data-theme="dark"] a,[data-theme="dark"] label,
+        [data-theme="dark"] small,[data-theme="dark"] strong { color:#fff !important; }
+
+        /* ── HERO ────────────────────────────────────── */
+        .hero-tours {
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/bg4.avif');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
+            transition: opacity 1s ease;
+        }
+
+        .hero-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(217,4,41,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(217,4,41,0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-bottom-bar {
+            background: #D90429;
+            height: 8px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* ── FILTER TABS ─────────────────────────────── */
+        .filter-btn {
+            padding: 0.6rem 1.6rem;
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: 2px solid #000;
+            cursor: pointer;
+            transition: all .25s ease;
+            background: transparent;
+            color: #000;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #D90429;
+            border-color: #D90429;
+            color: #fff;
+        }
+        [data-theme="dark"] .filter-btn {
+            border-color: #fff;
+            color: #fff;
+        }
+        [data-theme="dark"] .filter-btn:hover,
+        [data-theme="dark"] .filter-btn.active {
+            background: #D90429;
+            border-color: #D90429;
+            color: #fff;
+        }
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+
+        /* ── TOUR CARD ───────────────────────────────── */
+        .tour-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+        }
+        .tour-card:hover {
+            border-color: #D90429;
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .tour-card .card-img {
+            overflow: hidden;
+        }
+        .tour-card .card-img img {
+            transition: transform .6s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .tour-card:hover .card-img img {
+            transform: scale(1.08);
+        }
+        .tour-card .difficulty-badge {
+            position: absolute;
+            top: 0; left: 0;
+            padding: 0.35rem 1rem;
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        .tour-card .slots-badge {
+            position: absolute;
+            top: 0; right: 0;
+            padding: 0.35rem 0.8rem;
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+        }
+
+        /* ── FEATURED TOUR (BIG CARD) ────────────────── */
+        .featured-tour {
+            position: relative;
+            overflow: hidden;
+            min-height: 560px;
+        }
+        .featured-tour img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .7s ease;
+        }
+        .featured-tour:hover img { transform: scale(1.04); }
+        .featured-tour .ft-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.92) 50%, rgba(0,0,0,0.2) 100%);
+        }
+        .featured-tour .ft-content {
+            position: relative;
+            z-index: 2;
+            padding: 3.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            max-width: 56%;
+        }
+        @media(max-width:768px) {
+            .featured-tour .ft-content { max-width: 100%; padding: 2rem; }
+            .featured-tour .ft-overlay {
+                background: linear-gradient(to top, rgba(0,0,0,0.92) 60%, rgba(0,0,0,0.2) 100%);
+            }
+        }
+
+        /* ── ACCORDION ───────────────────────────────── */
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .45s ease, padding .3s ease;
+        }
+        .accordion-body.open {
+            max-height: 600px;
+        }
+        .accordion-icon { transition: transform .35s ease; }
+        .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+
+        /* ── MARQUEE ─────────────────────────────────── */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── PROCESS STEP ────────────────────────────── */
+        .process-step {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+        .process-step::after {
+            content: '';
+            position: absolute;
+            left: 1.75rem;
+            top: 3.5rem;
+            bottom: 0;
+            width: 2px;
+            background: #e5e7eb;
+        }
+        .process-step:last-child::after { display: none; }
+        [data-theme="dark"] .process-step::after { background: #333; }
+
+        /* ── COMPARE TABLE ───────────────────────────── */
+        .compare-row:nth-child(odd) { background: #f9fafb; }
+        [data-theme="dark"] .compare-row:nth-child(odd) { background: #0d0d0d; }
+
+        /* ── FADE UP ─────────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── DARK MODE OVERRIDES ─────────────────────── */
+        [data-theme="dark"] .filter-btn { border-color:#555; }
+        [data-theme="dark"] .tour-card { background:#0a0a0a !important; }
+        [data-theme="dark"] .tour-card:hover { border-color:#D90429; }
+        [data-theme="dark"] .bg-white { background:#000 !important; }
+        [data-theme="dark"] .bg-gray-50 { background:#0a0a0a !important; }
+        [data-theme="dark"] .bg-gray-100 { background:#111 !important; }
+        [data-theme="dark"] .border-black { border-color:#fff !important; }
+        [data-theme="dark"] .border-gray-200 { border-color:#222 !important; }
+        [data-theme="dark"] .text-black { color:#fff !important; }
+        [data-theme="dark"] .text-gray-600 { color:#999 !important; }
+        [data-theme="dark"] .text-gray-500 { color:#888 !important; }
+        [data-theme="dark"] .text-gray-400 { color:#666 !important; }
+        [data-theme="dark"] .compare-row:nth-child(odd) { background:#0d0d0d !important; }
+        [data-theme="dark"] .accordion-item { border-color:#333 !important; }
+    </style>
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero-tours">
+        <div class="hero-bg-img"></div>
+        <div class="hero-grid-overlay"></div>
+        <div class="hero-bottom-bar"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 pb-20  w-full">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+
+                <!-- Left text -->
+                <div>
+                    <p class="text-[#D90429] uppercase tracking-[0.45em] font-semibold text-xs mb-5 mt-20">
+                        2026 Season · Slots Open Now
+                    </p>
+                    <h1 class="italic text-white text-5xl sm:text-6xl md:text-7xl font-semibold uppercase tracking-tighter leading-[0.86]">
+                        CHOOSE<br>YOUR<br>
+                        <span class="text-[#D90429]">BATTLEFIELD.</span>
+                    </h1>
+                    <p class="mt-8 text-white text-base md:text-lg max-w-xl leading-relaxed font-semibold">
+                        From the frozen passes of Ladakh to the red sands of the Thar — every Redline expedition is engineered to push you beyond the map's edge.
+                    </p>
+                </div>
+
+                <!-- Right: quick-stats card -->
+                <div class="border-2 border-white border-opacity-20 bg-black bg-opacity-60 p-8 min-w-[280px] flex-shrink-0">
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.35em] text-[#D90429] mb-6">Season At A Glance</p>
+                    <div class="space-y-5">
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                            <span class="text-gray-400 text-xs font-semibold uppercase tracking-widest">Total Tours</span>
+                            <span class="text-white font-semibold text-2xl">08</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                            <span class="text-gray-400 text-xs font-semibold uppercase tracking-widest">Countries</span>
+                            <span class="text-white font-semibold text-2xl">04</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                            <span class="text-gray-400 text-xs font-semibold uppercase tracking-widest">Max Days</span>
+                            <span class="text-white font-semibold text-2xl">21</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400 text-xs font-semibold uppercase tracking-widest">Slots Left</span>
+                            <span class="text-[#D90429] font-semibold text-2xl">12</span>
+                        </div>
+                    </div>
+                    <a href="#all-tours"
+                        class="btn1 mt-8 block w-full py-3 bg-[#D90429] text-white font-semibold uppercase tracking-widest text-xs text-center hover:bg-white hover:text-black transition-all duration-300">
+                        Browse All Tours ↓
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         FEATURED TOUR — BIG HERO CARD
+    ═══════════════════════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 fade-up">
+                <div>
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-3">Editor's Pick · 2026</h3>
+                    <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                        FLAGSHIP <span class="text-[#D90429]">EXPEDITION.</span>
+                    </h2>
+                </div>
+                <p class="text-gray-500 text-xs font-semibold uppercase tracking-widest max-w-xs text-right hidden sm:block">
+                    Our most demanding and most celebrated route — not for the faint-hearted.
+                </p>
+            </div>
+
+            <!-- Featured card -->
+            <div class="featured-tour fade-up" style="transition-delay:.1s">
+                <img src="images/img5.avif" alt="The High Himalaya" />
+                <div class="ft-overlay"></div>
+                <div class="ft-content">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="bg-[#D90429] text-white text-[10px] font-semibold uppercase tracking-widest px-4 py-1.5">14 Days</span>
+                        <span class="bg-white text-black text-[10px] font-semibold uppercase tracking-widest px-4 py-1.5">Expert Level</span>
+                        <span class="text-gray-400 text-[10px] font-semibold uppercase tracking-widest">⬩ 3 Slots Left</span>
+                    </div>
+                    <h3 class="text-white text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none mb-4">
+                        The High<br><span class="text-[#D90429]">Himalaya</span>
+                    </h3>
+                    <p class="text-gray-300 text-sm font-semibold leading-relaxed mb-6 max-w-lg">
+                        Leh → Manali → Khardung La → Pangong Lake. 1,800km across the roof of the world. Altitude peaks at 5,359m. Temperatures drop to −12°C. This is not a tour — it's a reckoning.
+                    </p>
+                    <div class="flex flex-wrap gap-6 mb-8">
+                        <div>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest">From</p>
+                            <p class="text-white text-2xl font-semibold">₹1,45,000</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-500 font-semibold uppercase tracking-widest">Distance</p>
+                            <p class="text-white text-2xl font-semibold">1,800 km</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-500 font-semibold uppercase tracking-widest">Max Altitude</p>
+                            <p class="text-white text-2xl font-semibold">5,359 m</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="contact.html"
+                            class="btn1 px-10 py-4 bg-[#D90429] text-white font-semibold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all duration-300">
+                            Book This Tour
+                        </a>
+                        <a href="rental.html"
+                            class="px-10 py-4 border-2 border-white text-white font-semibold uppercase tracking-widest text-xs hover:border-[#D90429] hover:text-[#D90429] transition-all duration-300">
+                            Full Itinerary
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ALL TOURS — FILTER + GRID
+    ═══════════════════════════════════════════ -->
+    <section id="all-tours" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Section header -->
+            <div class="flex flex-col items-center text-center mb-14 fade-up">
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Full Lineup</h3>
+                <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                    ALL <span class="text-[#D90429]">EXPEDITIONS.</span>
+                </h2>
+            </div>
+
+            <!-- Filter bar -->
+            <div class="flex flex-wrap justify-center gap-3 mb-14 fade-up" style="transition-delay:.1s">
+                <button class="filter-btn active" data-filter="all">All Routes</button>
+                <button class="filter-btn" data-filter="beginner">Beginner</button>
+                <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                <button class="filter-btn" data-filter="expert">Expert Only</button>
+                <button class="filter-btn" data-filter="international">International</button>
+            </div>
+
+            <!-- Grid -->
+            <div id="tours-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- CARD 1 -->
+                <div class="tour-card bg-white fade-up" data-difficulty="expert" style="transition-delay:0s">
+                    <div class="card-img aspect-[4/3]">
+                        <img src="images/img1.webp" alt="High Himalaya" />
+                        <div class="difficulty-badge bg-black text-white">Expert Only</div>
+                        <div class="slots-badge">3 Slots</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-[#D90429] text-white px-2 py-1 font-semibold uppercase tracking-wider">14 Days</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">1,800 km</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">5,359m Alt</span>
+                        </div>
+                        <h3 class="text-xl font-semibold uppercase tracking-tight text-black mb-1">The High Himalaya</h3>
+                        <p class="text-gray-400 text-[11px] font-semibold uppercase tracking-[0.1em] mb-3">Leh · Manali · Khardung La</p>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed mb-5">The crown jewel of Indian adventure riding. Frozen passes, altitude sickness warnings, and the most rewarding summit in the world.</p>
+                        <div class="flex items-center justify-between border-t-2 border-black pt-4">
+                            <span class="text-black font-semibold text-xl">₹1,45,000</span>
+                            <a href="contact.html" class="text-[10px] font-semibold uppercase tracking-widest text-[#D90429] hover:underline">Book Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="tour-card bg-white fade-up" data-difficulty="expert" style="transition-delay:.05s">
+                    <div class="card-img aspect-[4/3]">
+                        <img src="images/img2.webp" alt="Desert Rally Raid" />
+                        <div class="difficulty-badge bg-black text-white">Expert Only</div>
+                        <div class="slots-badge">5 Slots</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-[#D90429] text-white px-2 py-1 font-semibold uppercase tracking-wider">7 Days</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">900 km</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">Sand Dunes</span>
+                        </div>
+                        <h3 class="text-xl font-semibold uppercase tracking-tight text-black mb-1">Desert Rally Raid</h3>
+                        <p class="text-gray-400 text-[11px] font-semibold uppercase tracking-[0.1em] mb-3">Jaisalmer · Thar Desert</p>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed mb-5">Full-throttle through the Thar. Dune crossings, dry riverbeds, and 48°C heat — a true test of man and machine in India's most hostile landscape.</p>
+                        <div class="flex items-center justify-between border-t-2 border-black pt-4">
+                            <span class="text-black font-semibold text-xl">₹85,000</span>
+                            <a href="contact.html" class="text-[10px] font-semibold uppercase tracking-widest text-[#D90429] hover:underline">Book Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="tour-card bg-white fade-up" data-difficulty="beginner" style="transition-delay:.1s">
+                    <div class="card-img aspect-[4/3]">
+                        <img src="images/img3.jpg" alt="Coastal Jungle Run" />
+                        <div class="difficulty-badge bg-[#D90429] text-white">Beginner</div>
+                        <div class="slots-badge">8 Slots</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-[#D90429] text-white px-2 py-1 font-semibold uppercase tracking-wider">5 Days</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">600 km</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">Coastal</span>
+                        </div>
+                        <h3 class="text-xl font-semibold uppercase tracking-tight text-black mb-1">Coastal Jungle Run</h3>
+                        <p class="text-gray-400 text-[11px] font-semibold uppercase tracking-[0.1em] mb-3">Goa · Gokarna · Munnar</p>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed mb-5">A rider's awakening — sea breeze, jungle trails, and endless coastal curves through the Western Ghats. Perfect entry point for new ADV riders.</p>
+                        <div class="flex items-center justify-between border-t-2 border-black pt-4">
+                            <span class="text-black font-semibold text-xl">₹55,000</span>
+                            <a href="contact.html" class="text-[10px] font-semibold uppercase tracking-widest text-[#D90429] hover:underline">Book Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4 -->
+                <div class="tour-card bg-white fade-up" data-difficulty="international" style="transition-delay:.15s">
+                    <div class="card-img aspect-[4/3]">
+                        <img src="images/img9.jpg" alt="Bhutan Circuit" />
+                        <div class="difficulty-badge bg-gray-800 text-white">International</div>
+                        <div class="slots-badge">4 Slots</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-[#D90429] text-white px-2 py-1 font-semibold uppercase tracking-wider">10 Days</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">1,200 km</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">Bhutan</span>
+                        </div>
+                        <h3 class="text-xl font-semibold uppercase tracking-tight text-black mb-1">Bhutan Circuit</h3>
+                        <p class="text-gray-400 text-[11px] font-semibold uppercase tracking-[0.1em] mb-3">Phuentsholing · Thimphu</p>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed mb-5">Ride through the last Himalayan kingdom. Dragon country roads, monasteries on cliff edges, and mountain passes that touch the clouds.</p>
+                        <div class="flex items-center justify-between border-t-2 border-black pt-4">
+                            <span class="text-black font-semibold text-xl">₹1,20,000</span>
+                            <a href="contact.html" class="text-[10px] font-semibold uppercase tracking-widest text-[#D90429] hover:underline">Book Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 5 -->
+                <div class="tour-card bg-white fade-up" data-difficulty="intermediate" style="transition-delay:.2s">
+                    <div class="card-img aspect-[4/3]">
+                        <img src="images/img10.jpg" alt="Spiti Assault" />
+                        <div class="difficulty-badge bg-[#D90429] text-white">Intermediate</div>
+                        <div class="slots-badge">6 Slots</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-[#D90429] text-white px-2 py-1 font-semibold uppercase tracking-wider">9 Days</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">1,100 km</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">4,500m Alt</span>
+                        </div>
+                        <h3 class="text-xl font-semibold uppercase tracking-tight text-black mb-1">Spiti Assault</h3>
+                        <p class="text-gray-400 text-[11px] font-semibold uppercase tracking-[0.1em] mb-3">Shimla · Kaza · Pin Valley</p>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed mb-5">The cold desert of Himachal Pradesh. Ancient monasteries, moonscapes, and switchbacks that'll make your hands shake — in the best way possible.</p>
+                        <div class="flex items-center justify-between border-t-2 border-black pt-4">
+                            <span class="text-black font-semibold text-xl">₹98,000</span>
+                            <a href="contact.html" class="text-[10px] font-semibold uppercase tracking-widest text-[#D90429] hover:underline">Book Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 6 -->
+                <div class="tour-card bg-white fade-up" data-difficulty="international" style="transition-delay:.25s">
+                    <div class="card-img aspect-[4/3]">
+                        <img src="images/img11.webp" alt="Northeast Frontier" />
+                        <div class="difficulty-badge bg-gray-800 text-white">International</div>
+                        <div class="slots-badge">2 Slots</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-[#D90429] text-white px-2 py-1 font-semibold uppercase tracking-wider">21 Days</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">3,200 km</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 font-semibold uppercase tracking-wider">5 States</span>
+                        </div>
+                        <h3 class="text-xl font-semibold uppercase tracking-tight text-black mb-1">Northeast Frontier</h3>
+                        <p class="text-gray-400 text-[11px] font-semibold uppercase tracking-[0.1em] mb-3">Assam · Meghalaya · Nagaland</p>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed mb-5">India's final frontier. Living root bridges, tribal mountain kingdoms, and roads that don't appear on any GPS — the ultimate bucket-list ride.</p>
+                        <div class="flex items-center justify-between border-t-2 border-black pt-4">
+                            <span class="text-black font-semibold text-xl">₹1,85,000</span>
+                            <a href="contact.html" class="text-[10px] font-semibold uppercase tracking-widest text-[#D90429] hover:underline">Book Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         WHAT'S INCLUDED — COMPARE TABLE
+    ═══════════════════════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col items-center text-center mb-16 fade-up">
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">No Hidden Costs</h3>
+                <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                    WHAT'S IN THE <span class="text-[#D90429]">PACKAGE.</span>
+                </h2>
+                <p class="mt-6 text-gray-500 text-sm font-semibold uppercase tracking-widest max-w-xl">
+                    Every rupee you spend is accounted for below. We don't believe in fine print.
+                </p>
+            </div>
+
+            <!-- Compare table -->
+            <div class="overflow-x-auto fade-up" style="transition-delay:.1s">
+                <table class="w-full min-w-[640px] border-collapse">
+                    <thead>
+                        <tr class="border-b-4 border-black">
+                            <th class="text-left py-4 px-6 text-xs font-semibold uppercase tracking-widest text-black w-2/5">What's Included</th>
+                            <th class="py-4 px-6 text-center text-xs font-semibold uppercase tracking-widest text-[#D90429]">Beginner</th>
+                            <th class="py-4 px-6 text-center text-xs font-semibold uppercase tracking-widest text-black">Intermediate</th>
+                            <th class="py-4 px-6 text-center text-xs font-semibold uppercase tracking-widest text-black">Expert</th>
+                            <th class="py-4 px-6 text-center text-xs font-semibold uppercase tracking-widest text-gray-500">International</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Adventure bike (full day)</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Lead guide + sweep rider</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Accommodation (twin-share)</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Meals (breakfast + dinner)</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Medical officer on-route</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Support vehicle + mechanic</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row border-b border-gray-200">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">Permit handling (inner-line)</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="py-4 px-6 text-sm font-semibold text-black">International travel logistics</td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-dash text-gray-300 text-xl"></i></td>
+                            <td class="py-4 px-6 text-center"><i class="bi bi-check-circle-fill text-[#D90429] text-lg"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         HOW TO BOOK — PROCESS STEPS
+    ═══════════════════════════════════════════ -->
+    <section class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+                <!-- Left: heading + image -->
+                <div class="fade-up">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-black text-xs mb-4">Simple Process</h3>
+                    <h2 class="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-10">
+                        HOW TO<br><span class="text-[#D90429]">GET IN.</span>
+                    </h2>
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="images/img3.jpg" alt="Booking Process" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-8">
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-widest text-[#D90429] mb-2">Response Time</p>
+                                <p class="text-white text-2xl font-black uppercase">Under 24 Hours</p>
+                                <p class="text-gray-400 text-xs font-semibold mt-1">We confirm every slot personally — no bots, no auto-replies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: steps -->
+                <div class="pt-16 fade-up" style="transition-delay:.15s">
+                    <div class="process-step">
+                        <div class="flex items-start gap-5 mb-2">
+                            <div class="w-14 h-14 bg-[#D90429] flex items-center justify-center flex-shrink-0 text-white font-semibold text-lg">01</div>
+                            <div>
+                                <h4 class="text-white text-xl font-semibold uppercase tracking-tight mb-2">Choose Your Route</h4>
+                                <p class="text-gray-400 text-sm font-semibold leading-relaxed">Browse our lineup, check the difficulty ratings, and match the terrain to your skill level. Still unsure? Call a guide — not a sales rep.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="flex items-start gap-5 mb-2">
+                            <div class="w-14 h-14 bg-white flex items-center justify-center flex-shrink-0 text-black font-semibold text-lg">02</div>
+                            <div>
+                                <h4 class="text-white text-xl font-semibold uppercase tracking-tight mb-2">Submit Your Application</h4>
+                                <p class="text-gray-400 text-sm font-semibold leading-relaxed">Fill in the booking form with your riding history and license details. We screen every rider — not to gatekeep, but to protect your group.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="flex items-start gap-5 mb-2">
+                            <div class="w-14 h-14 bg-[#D90429] flex items-center justify-center flex-shrink-0 text-white font-semibold text-lg">03</div>
+                            <div>
+                                <h4 class="text-white text-xl font-semibold uppercase tracking-tight mb-2">Confirmation Call</h4>
+                                <p class="text-gray-400 text-sm font-semibold leading-relaxed">A lead guide calls you within 24 hours for a short briefing call. Slot is confirmed once the 30% deposit is processed.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="flex items-start gap-5 mb-2">
+                            <div class="w-14 h-14 bg-white flex items-center justify-center flex-shrink-0 text-black font-semibold text-lg">04</div>
+                            <div>
+                                <h4 class="text-white text-xl font-semibold uppercase tracking-tight mb-2">Pre-Ride Prep Pack</h4>
+                                <p class="text-gray-400 text-sm font-semibold leading-relaxed">30 days before departure, you receive your full gear checklist, route notes, emergency protocols, and meet-point coordinates.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="flex items-start gap-5 mb-2">
+                            <div class="w-14 h-14 bg-[#D90429] flex items-center justify-center flex-shrink-0 text-white font-semibold text-lg">05</div>
+                            <div>
+                                <h4 class="text-white text-xl font-semibold uppercase tracking-tight mb-2">Saddle Up & Ride</h4>
+                                <p class="text-gray-400 text-sm font-semibold leading-relaxed">Show up, gear check done, pre-ride briefing at 0600. The trail is waiting. Everything else is already handled.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SOCIAL PROOF STRIP
+    ═══════════════════════════════════════════ -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col items-center text-center mb-16 fade-up">
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Field Reports</h3>
+                <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                    STRAIGHT FROM<br><span class="text-[#D90429]">THE DIRT.</span>
+                </h2>
+            </div>
+
+            <!-- 2-col testimonials + big quote -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border-2 border-black">
+
+                <!-- Big quote -->
+                <div class="lg:col-span-1 bg-[#D90429] p-10 flex flex-col justify-between fade-up">
+                    <div class="text-white text-7xl font-semibold leading-none mb-6">"</div>
+                    <p class="text-white text-xl font-semibold leading-snug mb-8">
+                        I've ridden in 14 countries. Nothing came close to what Redline did in Spiti. The route, the crew, the bikes — absolute perfection.
+                    </p>
+                    <div class="border-t border-red-700 pt-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-black flex items-center justify-center text-white font-semibold text-sm">MS</div>
+                            <div>
+                                <h4 class="text-white text-sm font-semibold uppercase tracking-widest">Marcus Steinberg</h4>
+                                <p class="text-red-200 text-[10px] font-semibold uppercase tracking-widest">BMW R1250 GS · Germany</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two stacked testimonials -->
+                <div class="lg:col-span-2 divide-y-2 divide-black">
+                    <div class="p-10 bg-white fade-up" style="transition-delay:.1s">
+                        <div class="text-[#D90429] text-4xl font-semibold mb-4">"</div>
+                        <p class="text-black font-semibold text-base leading-snug mb-6">The Himalayan Crossing broke me in the best way. When I reached Khardung La, I cried on the bike. Genuinely. Worth every rupee and every aching muscle.</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-black flex items-center justify-center text-white font-semibold text-xs">AR</div>
+                            <div>
+                                <h4 class="text-sm font-semibold uppercase tracking-widest text-black">Arjun Raghav</h4>
+                                <p class="text-[10px] text-[#D90429] font-semibold uppercase">Himalayan 450 · Chennai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-10 bg-white fade-up" style="transition-delay:.15s">
+                        <div class="text-[#D90429] text-4xl font-semibold mb-4">"</div>
+                        <p class="text-black font-semibold text-base leading-snug mb-6">I came as a solo female rider, not knowing anyone. Left with a group of people I'd trust my life with — and I literally did, a few times on those mountain passes.</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-[#D90429] flex items-center justify-center text-white font-semibold text-xs">PK</div>
+                            <div>
+                                <h4 class="text-sm font-semibold uppercase tracking-widest text-black">Preet Kaur</h4>
+                                <p class="text-[10px] text-[#D90429] font-semibold uppercase">KTM 390 Adventure · Chandigarh</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id="footer"></div>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'ui-sans-serif', 'system-ui'] }
+                }
+            }
+        }
+
+
+        // Scroll fade-in
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Filter tabs
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('#tours-grid .tour-card').forEach(card => {
+                    const diff = card.dataset.difficulty;
+                    const show = filter === 'all' || diff === filter;
+                    card.style.display = show ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Accordion
+        function toggleAccordion(btn) {
+            const item = btn.closest('.accordion-item');
+            const body = item.querySelector('.accordion-body');
+            const isOpen = item.classList.contains('open');
+
+            // close all
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.accordion-body').classList.remove('open');
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                body.classList.add('open');
+            }
+        }
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+</html>

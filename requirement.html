@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ══ THEME ══════════════════════════════════════ */
+        :root { --bg:#fff; --fg:#111; }
+        [data-theme="dark"] { --bg:#000; --fg:#fff; }
+
+        body {
+            background-color: var(--bg) !important;
+            color: var(--fg);
+            transition: background-color .4s ease, color .4s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card { background-color:#000 !important; }
+        [data-theme="dark"] body,[data-theme="dark"] p,[data-theme="dark"] h1,
+        [data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4,
+        [data-theme="dark"] h5,[data-theme="dark"] h6,[data-theme="dark"] span,
+        [data-theme="dark"] li,[data-theme="dark"] a,[data-theme="dark"] label,
+        [data-theme="dark"] small,[data-theme="dark"] strong { color:#fff !important; }
+
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+
+        /* ══ HERO — FULL BLEED DARK + ANGLED BAND ══════ */
+        .hero-req {
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        /* cross-hatch noise overlay */
+        .hero-noise {
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg,   transparent, transparent 34px, rgba(255,255,255,.015) 34px, rgba(255,255,255,.015) 35px),
+                repeating-linear-gradient(90deg,  transparent, transparent 34px, rgba(255,255,255,.015) 34px, rgba(255,255,255,.015) 35px);
+            pointer-events: none;
+        }
+        /* large red corner slash */
+        .hero-slash {
+            position: absolute;
+            bottom: -5%;
+            right: -5%;
+            width: 55%;
+            height: 115%;
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 0;
+        }
+        .hero-slash img {
+            width:100%; height:100%;
+            object-fit:cover;
+            mix-blend-mode: multiply;
+            opacity:.45;
+        }
+        @media(max-width:1023px){
+            .hero-slash {
+                width:100%; height:45%;
+                clip-path:polygon(0 30%, 100% 0, 100% 100%, 0 100%);
+                bottom:0; right:0; top:unset;
+            }
+        }
+        /* counter badge */
+        .req-counter {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:52px; height:52px;
+            background:#D90429;
+            font-weight:600;
+            font-size:1rem;
+            color:#fff;
+            flex-shrink:0;
+        }
+
+        /* ══ MARQUEE ════════════════════════════════════ */
+        .marquee-track {
+            display:flex; width:max-content;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            from{transform:translateX(0);}
+            to  {transform:translateX(-50%);}
+        }
+
+        /* ══ CHECKLIST CARD ═════════════════════════════ */
+        .check-card {
+            border: 2px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .3s, transform .35s, box-shadow .35s;
+        }
+        .check-card::after {
+            content:'';
+            position:absolute;
+            left:0; top:0;
+            width:4px; height:0;
+            background:#D90429;
+            transition: height .4s ease;
+        }
+        .check-card:hover::after { height:100%; }
+        .check-card:hover {
+            border-color:#D90429;
+            transform:translateY(-5px);
+            box-shadow:6px 6px 0 #D90429;
+        }
+        [data-theme="dark"] .check-card { border-color:#2a2a2a; background:#0a0a0a; }
+        [data-theme="dark"] .check-card:hover { border-color:#D90429; }
+
+        /* ══ LEVEL TABS ═════════════════════════════════ */
+        .lvl-tab {
+            padding:.7rem 1.8rem;
+            font-size:.65rem;
+            font-weight:600;
+            text-transform:uppercase;
+            letter-spacing:.22em;
+            border:2px solid #000;
+            cursor:pointer;
+            transition:all .25s;
+            background:transparent;
+            color:#000;
+        }
+        .lvl-tab.active, .lvl-tab:hover {
+            background:#D90429;
+            border-color:#D90429;
+            color:#fff;
+        }
+        [data-theme="dark"] .lvl-tab { border-color:#fff; color:#fff; }
+        [data-theme="dark"] .lvl-tab.active,
+        [data-theme="dark"] .lvl-tab:hover { background:#D90429; border-color:#D90429; color:#fff; }
+
+        .lvl-panel { display:none; }
+        .lvl-panel.active { display:block; }
+
+        /* ══ GEAR CHECKLIST TOGGLE ══════════════════════ */
+        .gear-row {
+            display:flex;
+            align-items:center;
+            gap:1rem;
+            padding:.9rem 1.2rem;
+            border-bottom:1px solid #f3f4f6;
+            cursor:pointer;
+            transition:background .2s;
+            user-select:none;
+        }
+        .gear-row:last-child { border:none; }
+        .gear-row:hover { background:#fef2f2; }
+        [data-theme="dark"] .gear-row:hover { background:#1a0000; }
+        [data-theme="dark"] .gear-row { border-color:#1a1a1a; }
+        .gear-box {
+            width:22px; height:22px;
+            border:2px solid #D90429;
+            display:flex; align-items:center; justify-content:center;
+            flex-shrink:0;
+            transition:background .2s;
+        }
+        .gear-row.checked .gear-box { background:#D90429; }
+        .gear-row.checked .gear-box::after {
+            content:'✓';
+            color:#fff;
+            font-size:.7rem;
+            font-weight:600;
+        }
+        .gear-row.checked .gear-label { text-decoration:line-through; color:#aaa; }
+        .gear-progress-bar {
+            height:6px;
+            background:#f3f4f6;
+            position:relative;
+        }
+        [data-theme="dark"] .gear-progress-bar { background:#1a1a1a; }
+        .gear-progress-fill {
+            height:100%;
+            background:#D90429;
+            transition: width .4s ease;
+        }
+
+        /* ══ WARNING STRIP CARD ═════════════════════════ */
+        .warn-card {
+            border-left:6px solid #D90429;
+            background:#fff7f7;
+            transition: transform .3s;
+        }
+        .warn-card:hover { transform:translateX(6px); }
+        [data-theme="dark"] .warn-card { background:#0f0000; border-color:#D90429; }
+
+        /* ══ SKILL METER ════════════════════════════════ */
+        .skill-bar-bg {
+            height:8px;
+            background:#e5e7eb;
+        }
+        [data-theme="dark"] .skill-bar-bg { background:#222; }
+        .skill-bar-fill {
+            height:100%;
+            background:#D90429;
+            transition:width 1.2s ease;
+            width:0;
+        }
+
+        /* ══ ACCORDION ══════════════════════════════════ */
+        .acc-body {
+            max-height:0;
+            overflow:hidden;
+            transition:max-height .45s ease;
+        }
+        .acc-body.open { max-height:500px; }
+        .acc-icon { transition:transform .35s; }
+        .acc-item.open .acc-icon { transform:rotate(45deg); }
+
+        /* ══ STICKY SIDEBAR PROGRESS ════════════════════ */
+        .section-nav-dot {
+            width:10px; height:10px;
+            border-radius:50%;
+            border:2px solid #D90429;
+            transition:background .3s, transform .3s;
+            cursor:pointer;
+        }
+        .section-nav-dot.active {
+            background:#D90429;
+            transform:scale(1.3);
+        }
+
+        /* ══ DISQUALIFIER CARD ══════════════════════════ */
+        .disq-card {
+            border:2px solid #000;
+            position:relative;
+            overflow:hidden;
+            transition:all .3s;
+        }
+        .disq-card::before {
+            content:'✕';
+            position:absolute;
+            top:-10px; right:-4px;
+            font-size:6rem;
+            font-weight:600;
+            color:rgba(217,4,41,0.06);
+            line-height:1;
+            pointer-events:none;
+        }
+        .disq-card:hover { border-color:#D90429; background:#fff7f7; }
+        [data-theme="dark"] .disq-card { border-color:#333; background:#0a0a0a; }
+        [data-theme="dark"] .disq-card:hover { background:#0f0000; border-color:#D90429; }
+
+        /* ══ SELF-ASSESSMENT QUIZ ═══════════════════════ */
+        .quiz-option {
+            border:2px solid #e5e7eb;
+            padding:1rem 1.25rem;
+            cursor:pointer;
+            transition:all .2s;
+            display:flex; align-items:center; gap:.75rem;
+            font-weight:700; font-size:.8rem;
+            text-transform:uppercase; letter-spacing:.1em;
+            color:#111;
+        }
+        .quiz-option:hover { border-color:#D90429; }
+        .quiz-option.selected { border-color:#D90429; background:#D90429; color:#fff; }
+        [data-theme="dark"] .quiz-option { border-color:#333; color:#fff; background:#0a0a0a; }
+        [data-theme="dark"] .quiz-option.selected { background:#D90429; border-color:#D90429; color:#fff; }
+        .quiz-radio {
+            width:16px; height:16px;
+            border-radius:50%;
+            border:2px solid currentColor;
+            flex-shrink:0;
+        }
+        .quiz-option.selected .quiz-radio {
+            background:#fff;
+            border-color:#fff;
+        }
+
+        /* ══ FADE UP ════════════════════════════════════ */
+        .fade-up {
+            opacity:0; transform:translateY(36px);
+            transition:opacity .7s ease, transform .7s ease;
+        }
+        .fade-up.visible { opacity:1; transform:translateY(0); }
+
+        /* ══ DARK OVERRIDES ═════════════════════════════ */
+        [data-theme="dark"] .bg-white  { background:#000 !important; }
+        [data-theme="dark"] .bg-gray-50 { background:#0a0a0a !important; }
+        [data-theme="dark"] .bg-gray-100{ background:#111 !important; }
+        [data-theme="dark"] .border-black { border-color:#fff !important; }
+        [data-theme="dark"] .border-gray-200 { border-color:#222 !important; }
+        [data-theme="dark"] .text-black  { color:#fff !important; }
+        [data-theme="dark"] .text-gray-600{ color:#aaa !important; }
+        [data-theme="dark"] .text-gray-500{ color:#888 !important; }
+        [data-theme="dark"] .text-gray-400{ color:#666 !important; }
+        [data-theme="dark"] .warn-card   { background:#0f0000 !important; }
+        [data-theme="dark"] .skill-bar-bg{ background:#222 !important; }
+        [data-theme="dark"] .lvl-tab     { border-color:#555; }
+    </style>
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         HERO — DARK WITH RED CORNER SLASH
+    ═══════════════════════════════════════════════ -->
+    <section class="hero-req">
+        <div class="hero-noise"></div>
+
+        <div class="hero-slash">
+            <img src="images/img1.webp" alt="Rider Requirements" />
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-28 w-full">
+            <div class="max-w-2xl">
+
+                <div class="flex items-center gap-3 mb-7">
+                    <div class="h-px w-10 bg-[#D90429]"></div>
+                    <p class="text-[#D90429] uppercase tracking-[0.45em] font-semibold text-xs">Before You Ride · Mission Briefing</p>
+                </div>
+
+                <h1 class="italic text-white text-5xl sm:text-6xl md:text-8xl font-semibold uppercase tracking-tighter leading-[0.86] mb-8">
+                    CAN YOU<br>HANDLE<br>
+                    <span class="text-[#D90429]">THE TRAIL?</span>
+                </h1>
+
+                <p class="text-gray-400 text-base md:text-lg font-semibold leading-relaxed mb-10 max-w-lg">
+                    Adventure riding is not for everyone — and that's not an insult, it's a safety protocol. Read every requirement below before booking. Non-negotiable.
+                </p>
+
+                <!-- 3 quick criteria pills -->
+                <div class="flex flex-wrap gap-3 mb-10">
+                    <span class="flex items-center gap-2 bg-white bg-opacity-5 border border-white border-opacity-15 px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-white">
+                        <i class="bi bi-id-card text-[#D90429]"></i> Valid License
+                    </span>
+                    <span class="flex items-center gap-2 bg-white bg-opacity-5 border border-white border-opacity-15 px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-white">
+                        <i class="bi bi-heart-pulse text-[#D90429]"></i> Medical Fitness
+                    </span>
+                    <span class="flex items-center gap-2 bg-white bg-opacity-5 border border-white border-opacity-15 px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-white">
+                        <i class="bi bi-shield-shaded text-[#D90429]"></i> Certified Gear
+                    </span>
+                    <span class="flex items-center gap-2 bg-white bg-opacity-5 border border-white border-opacity-15 px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-white">
+                        <i class="bi bi-person-check text-[#D90429]"></i> Age 21+
+                    </span>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="requirement.html"
+                        class="btn1 px-10 py-4 bg-[#D90429] text-white font-semibold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all duration-300">
+                        View Full Requirements
+                    </a>
+                    <a href="contact.html"
+                        class="px-10 py-4 border-2 border-gray-600 text-white font-semibold uppercase tracking-widest text-xs hover:border-[#D90429] hover:text-[#D90429] transition-all duration-300">
+                        Take the Self-Check →
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- bottom red bar -->
+        <div class="absolute bottom-0 left-0 w-full h-2 bg-[#D90429]"></div>
+    </section>
+  
+
+    <!-- ═══════════════════════════════════════════════
+         WHY WE SCREEN — 2 COL STATEMENT
+    ═══════════════════════════════════════════════ -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border-2 border-black">
+
+                <!-- Left: bold statement -->
+                <div class="p-10 md:p-16 border-b-2 lg:border-b-0 lg:border-r-2 border-black fade-up">
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.35em] text-[#D90429] mb-5">Why We Ask</p>
+                    <h2 class="text-black text-3xl md:text-5xl font-semibold uppercase tracking-tighter leading-none mb-6">
+                        WE SCREEN EVERY<br>RIDER. <span class="text-[#D90429]">NO EXCEPTIONS.</span>
+                    </h2>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed">
+                        This is not gatekeeping — it is accountability. The mountain doesn't care about your confidence or your ego. One unprepared rider can endanger an entire group of eight at 5,000 metres above sea level. We've built our zero-fatality record by holding every single rider to the same standard. That record is sacred to us.
+                    </p>
+                </div>
+
+                <!-- Right: stat pills -->
+                <div class="p-10 md:p-16 fade-up" style="transition-delay:.1s">
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.35em] text-[#D90429] mb-8">The Numbers Behind the Rules</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 bg-black flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xl font-semibold">0</span>
+                            </div>
+                            <div>
+                                <h4 class="text-black font-black uppercase tracking-tight text-base">Fatalities in 10 years</h4>
+                                <p class="text-gray-500 text-xs font-semibold mt-0.5">Our screening process is the primary reason why.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 bg-[#D90429] flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xl font-semibold">8%</span>
+                            </div>
+                            <div>
+                                <h4 class="text-black font-semibold uppercase tracking-tight text-base">Applications Declined</h4>
+                                <p class="text-gray-500 text-xs font-semibold mt-0.5">Declined due to experience gaps or medical flags.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 bg-black flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xl font-semibold">100%</span>
+                            </div>
+                            <div>
+                                <h4 class="text-black font-semibold uppercase tracking-tight text-base">Riders Briefed Pre-Ride</h4>
+                                <p class="text-gray-500 text-xs font-semibold mt-0.5">Every single rider, every single departure. Non-negotiable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         CORE REQUIREMENTS — NUMBERED CARD GRID
+    ═══════════════════════════════════════════════ -->
+    <section id="requirements" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col items-center text-center mb-16 fade-up">
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Mandatory For All Riders</h3>
+                <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                    CORE <span class="text-[#D90429]">REQUIREMENTS.</span>
+                </h2>
+                <p class="mt-5 text-gray-500 text-sm font-semibold uppercase tracking-widest max-w-2xl">
+                    These apply to every tour, every route, every level — no matter how experienced you are.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                <!-- R1 -->
+                <div class="check-card bg-white p-8 fade-up" style="transition-delay:0s">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="req-counter">01</div>
+                        <div>
+                            <h4 class="text-xl font-semibold uppercase tracking-tight text-black leading-tight">Valid Licence</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Non-negotiable · Verified on arrival</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed mb-5">
+                        A current, valid motorcycle endorsement (minimum class M/MCWG) is mandatory. International riders must carry their international driving permit. Learner licences are not accepted under any circumstance.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-black text-white px-3 py-1 font-semibold uppercase tracking-wider">Indian DL</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">IDP</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">Notarised Translation</span>
+                    </div>
+                </div>
+
+                <!-- R2 -->
+                <div class="check-card bg-white p-8 fade-up" style="transition-delay:.05s">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="req-counter">02</div>
+                        <div>
+                            <h4 class="text-xl font-semibold uppercase tracking-tight text-black leading-tight">Age Requirement</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Minimum 21 · No upper limit</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed mb-5">
+                        A current, valid motorcycle endorsement (minimum class M/MCWG) is mandatory. International riders must carry their international driving permit. Learner licences are not accepted under any circumstance.
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-black text-white px-3 py-1 font-semibold uppercase tracking-wider">21+ Years</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">Valid Govt ID</span>
+                    </div>
+                </div>
+
+                <!-- R3 -->
+                <div class="check-card bg-white p-8 fade-up" style="transition-delay:.1s">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="req-counter">03</div>
+                        <div>
+                            <h4 class="text-xl font-semibold uppercase tracking-tight text-black leading-tight">Travel Insurance</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Mandatory · Adventure sports clause</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed mb-5">
+                        A current, valid motorcycle endorsement (minimum class M/MCWG) is mandatory. International riders must carry their international driving permit. Learner licences are not accepted under any circumstance.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-[#D90429] text-white px-3 py-1 font-semibold uppercase tracking-wider">Adventure Sports</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">Medical Evacuation</span>
+                    </div>
+                </div>
+
+                <!-- R4 -->
+                <div class="check-card bg-white p-8 fade-up" style="transition-delay:.15s">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="req-counter">04</div>
+                        <div>
+                            <h4 class="text-xl font-semibold uppercase tracking-tight text-black leading-tight">Emergency Contact Info</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Submitted before departure</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed mb-5">
+                        A current, valid motorcycle endorsement (minimum class M/MCWG) is mandatory. International riders must carry their international driving permit. Learner licences are not accepted under any circumstance.
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-black text-white px-3 py-1 font-semibold uppercase tracking-wider">2 Contacts</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">Reachable Day-Of</span>
+                    </div>
+                </div>
+
+                <!-- R5 -->
+                <div class="check-card bg-white p-8 fade-up" style="transition-delay:.2s">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="req-counter">05</div>
+                        <div>
+                            <h4 class="text-xl font-semibold uppercase tracking-tight text-black leading-tight">Medical Self-Declaration</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Signed form required</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed mb-5">
+                      A current, valid motorcycle endorsement (minimum class M/MCWG) is mandatory. International riders must carry their international driving permit. Learner licences are not accepted under any circumstance.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-[#D90429] text-white px-3 py-1 font-semibold uppercase tracking-wider">Health Disclosure</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">Confidential</span>
+                    </div>
+                </div>
+
+                <!-- R6 -->
+                <div class="check-card bg-white p-8 fade-up" style="transition-delay:.25s">
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="req-counter">06</div>
+                        <div>
+                            <h4 class="text-xl font-semibold uppercase tracking-tight text-black leading-tight">Pre-Ride Briefing Attendance</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase tracking-widest mt-1">Mandatory · No exceptions</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-semibold leading-relaxed mb-5">
+                        A current, valid motorcycle endorsement (minimum class M/MCWG) is mandatory. International riders must carry their international driving permit. Learner licences are not accepted under any circumstance.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-black text-white px-3 py-1 font-semibold uppercase tracking-wider">90 Minutes</span>
+                        <span class="text-[10px] bg-gray-100 text-gray-600 px-3 py-1 font-semibold uppercase tracking-wider">0600 hrs</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         BY DIFFICULTY LEVEL — TABBED SECTION
+    ═══════════════════════════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col items-center text-center mb-14 fade-up">
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Level-Specific Rules</h3>
+                <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                    REQUIREMENTS BY <span class="text-[#D90429]">LEVEL.</span>
+                </h2>
+                <p class="mt-5 text-gray-500 text-sm font-semibold uppercase tracking-widest max-w-xl">
+                    In addition to core requirements, each difficulty tier has its own criteria. Find your level below.
+                </p>
+            </div>
+
+            <!-- tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 fade-up" style="transition-delay:.08s">
+                <button class="lvl-tab active" onclick="switchLevel('beginner', this)">Beginner</button>
+                <button class="lvl-tab" onclick="switchLevel('intermediate', this)">Intermediate</button>
+                <button class="lvl-tab" onclick="switchLevel('expert', this)">Expert Only</button>
+                <button class="lvl-tab" onclick="switchLevel('international', this)">International</button>
+            </div>
+
+            <!-- BEGINNER PANEL -->
+            <div class="lvl-panel active" id="panel-beginner">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border-2 border-black fade-up">
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-speedometer2"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Riding Experience</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">Minimum 1 year of active road riding. Must be comfortable on a bike above 200cc. No prior off-road experience required — but basic bike control at low speed is assessed at check-in.</p>
+                        <div class="mt-5">
+                            <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-2">Experience Required</p>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="30%"></div>
+                            </div>
+                            <p class="text-xs font-black text-[#D90429] mt-1">Beginner Level</p>
+                        </div>
+                    </div>
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-bicycle"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Physical Requirement</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">Able to ride 200–300km per day on mixed surfaces. Must be physically capable of lifting a 180kg bike from a horizontal position (assisted). Basic fitness — can walk 5km without difficulty.</p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>200–300km daily</li>
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>Assisted bike lift</li>
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>Basic walking fitness</li>
+                        </ul>
+                    </div>
+                    <div class="p-10">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-file-earmark-text"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Documents Needed</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Valid motorcycle licence</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Govt photo ID (Aadhaar / Passport)</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Travel insurance (adventure cover)</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Medical self-declaration form</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Signed waiver of liability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERMEDIATE PANEL -->
+            <div class="lvl-panel" id="panel-intermediate">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border-2 border-black fade-up">
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-speedometer2"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Riding Experience</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">Minimum 3 years active riding with documented off-road or gravel experience. Must be able to demonstrate controlled off-camber cornering, emergency braking on loose surfaces, and bike recovery unaided.</p>
+                        <div class="mt-5">
+                            <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-2">Experience Required</p>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="60%"></div>
+                            </div>
+                            <p class="text-xs font-black text-[#D90429] mt-1">Intermediate Level</p>
+                        </div>
+                    </div>
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-bicycle"></i></div>
+                        <h4 class="text-xl font-black uppercase tracking-tight text-black mb-3">Physical Requirement</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">Must be able to ride 300–400km on mixed terrain per day. Capable of independent bike recovery (no assist). Must be comfortable at altitude — prior trekking or cycling above 3,000m is strongly recommended.</p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>300–400km mixed terrain</li>
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>Solo bike recovery</li>
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>Altitude experience preferred</li>
+                        </ul>
+                    </div>
+                    <div class="p-10">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-file-earmark-text"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Additional Documents</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>All Beginner documents</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Riding history log (3+ years)</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Prior route or tour reference</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Enhanced insurance (above 4,000m)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPERT PANEL -->
+            <div class="lvl-panel" id="panel-expert">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border-2 border-[#D90429] fade-up">
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-[#D90429]">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-speedometer2"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Riding Experience</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">Minimum 5 years ADV riding with at least one documented multi-day high-altitude expedition. Must complete our Skills Assessment Ride (SAR) — a 4-hour on-site evaluation at our Chennai facility before slot confirmation.</p>
+                        <div class="mt-5">
+                            <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-2">Experience Required</p>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="90%"></div>
+                            </div>
+                            <p class="text-xs font-black text-[#D90429] mt-1">Expert Level</p>
+                        </div>
+                    </div>
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-[#D90429]">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-bicycle"></i></div>
+                        <h4 class="text-xl font-black uppercase tracking-tight text-black mb-3">Physical Requirement</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">400–500km per day capability on extreme terrain. Independent full bike recovery. Altitude sickness history must be declared. GP sign-off letter strongly recommended for all Expert tier riders regardless of age.</p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>400–500km extreme terrain</li>
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>SAR evaluation pass required</li>
+                            <li class="flex items-center gap-2 text-xs font-semibold text-gray-600"><i class="bi bi-check2 text-[#D90429]"></i>GP sign-off recommended</li>
+                        </ul>
+                    </div>
+                    <div class="p-10">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-file-earmark-text"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Expert-Only Documents</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>All Intermediate documents</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>SAR completion certificate</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Altitude expedition proof</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Inner-line permit application</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Sat-phone rental confirmation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERNATIONAL PANEL -->
+            <div class="lvl-panel" id="panel-international">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border-2 border-black fade-up">
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-globe-asia-australia"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Cross-Border Paperwork</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">International routes (Bhutan, Nepal, Sri Lanka) require valid passport, visa, and carnet de passage or vehicle import permit. We handle permit logistics — riders must provide correct documents 60 days ahead of departure.</p>
+                    </div>
+                    <div class="p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-translate"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">Language & Communication</h4>
+                        <p class="text-gray-600 text-sm font-semibold leading-relaxed">Basic English is required to understand safety briefings. In remote regions, all emergency communication goes through our guides. An international SIM with roaming or a Redline-issued satellite communicator is mandatory from Day 5 onwards.</p>
+                    </div>
+                    <div class="p-10">
+                        <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-file-earmark-text"></i></div>
+                        <h4 class="text-xl font-semibold uppercase tracking-tight text-black mb-3">International Documents</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>All core requirements</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Valid passport (6+ months)</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Country-specific visa</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>International driving permit</li>
+                            <li class="flex items-start gap-3 text-sm font-semibold text-gray-600"><i class="bi bi-check-circle-fill text-[#D90429] mt-0.5 flex-shrink-0"></i>Medical evacuation cover (intl)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         MANDATORY GEAR — INTERACTIVE CHECKLIST
+    ═══════════════════════════════════════════════ -->
+    <section class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+                <!-- Left: label -->
+                <div class="fade-up">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Pack Right or Don't Come</h3>
+                    <h2 class="text-white text-4xl md:text-5xl font-semibold uppercase tracking-tighter leading-none mb-6">
+                        MANDATORY<br><span class="text-[#D90429]">GEAR LIST.</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm font-semibold leading-relaxed mb-8 max-w-md">
+                        Use this as your packing checklist. Every item marked with a red border is inspected at the pre-ride check. Missing any of them means you don't leave the garage.
+                    </p>
+                    <!-- progress tracker -->
+                    <div class="bg-white bg-opacity-5 border border-gray-800 p-6">
+                        <div class="flex justify-between items-end mb-3">
+                            <p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">Packing Progress</p>
+                            <p class="text-[#D90429] font-semibold text-xl" id="gear-count">0 / 10</p>
+                        </div>
+                        <div class="gear-progress-bar">
+                            <div class="gear-progress-fill" id="gear-fill" style="width:0%"></div>
+                        </div>
+                        <p class="text-gray-600 text-[10px] font-semibold uppercase tracking-widest mt-3" id="gear-status">Click items on the right to check them off</p>
+                    </div>
+                    <div class="mt-8 relative overflow-hidden aspect-video">
+                        <img src="images/img2.webp" alt="Gear Check" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end p-6">
+                            <p class="text-white text-xs font-semibold uppercase tracking-widest">Our mechanic checks every item. No shortcuts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: interactive checklist -->
+                <div class="bg-white fade-up" style="transition-delay:.12s">
+                    <div class="bg-[#D90429] px-5 py-3 flex items-center justify-between">
+                        <p class="text-white text-[10px] font-semibold uppercase tracking-widest">Mandatory Equipment Checklist</p>
+                        <button onclick="resetGear()" class="text-white text-[10px] font-semibold uppercase tracking-widest hover:underline">Reset</button>
+                    </div>
+                    <div id="gear-list">
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Full-face or Modular Helmet (ECE 22.06 / ISI)</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Certified only — branded sticker must be visible</p>
+                            </div>
+                            <span class="text-[10px] text-[#D90429] font-semibold uppercase">Required</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">ADV / Textile Riding Jacket (CE Armour)</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Back, shoulder, elbow protection mandatory</p>
+                            </div>
+                            <span class="text-[10px] text-[#D90429] font-semibold uppercase">Required</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Riding Gloves (knuckle protection)</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">No bare-palm road rash on our watch</p>
+                            </div>
+                            <span class="text-[10px] text-[#D90429] font-semibold uppercase">Required</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Ankle-height Riding Boots</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">No trainers, sandals, or casual footwear permitted</p>
+                            </div>
+                            <span class="text-[10px] text-[#D90429] font-semibold uppercase">Required</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Riding Trousers (CE knee + hip armour)</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Or separate knee guards worn over trousers</p>
+                            </div>
+                            <span class="text-[10px] text-[#D90429] font-semibold uppercase">Required</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">High-Visibility Vest</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">For low-visibility mountain passes and tunnel sections</p>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-semibold uppercase">Advised</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">First Aid Kit (personal)</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Blister packs, bandages, AMS meds for altitude tours</p>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-semibold uppercase">Advised</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Thermal Underlayer (base layer set)</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Critical for Himalayan and Spiti routes</p>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-semibold uppercase">Advised</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Waterproof Dry Bags / Panniers</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Loose luggage is a safety hazard — all bags must be secured</p>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-semibold uppercase">Advised</span>
+                        </div>
+                        <div class="gear-row" onclick="toggleGearRow(this)">
+                            <div class="gear-box"></div>
+                            <div class="flex-1">
+                                <span class="gear-label text-sm font-semibold uppercase tracking-tight text-black">Hydration Pack or 2L Water Capacity</span>
+                                <p class="text-[10px] text-gray-400 font-semibold mt-0.5">Dehydration at altitude is a serious risk</p>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-semibold uppercase">Advised</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         DISQUALIFIERS — WHAT WILL GET YOU REJECTED
+    ═══════════════════════════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+
+                <!-- Left label -->
+                <div class="lg:col-span-2 fade-up">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Hard Stops</h3>
+                    <h2 class="text-black text-4xl md:text-5xl font-semibold uppercase tracking-tighter leading-none mb-6">
+                        WHAT GETS<br>YOU <span class="text-[#D90429]">TURNED AWAY.</span>
+                    </h2>
+                    <p class="text-gray-500 text-sm font-semibold leading-relaxed mb-6">
+                        These are non-negotiable disqualifiers. No refund exceptions apply for bookings cancelled due to any of the following conditions at check-in.
+                    </p>
+                    <div class="bg-[#D90429] p-6">
+                        <p class="text-white text-xs font-semibold uppercase tracking-widest leading-relaxed">
+                            If you're unsure whether any of these apply to you — contact us before booking, not after. Our guides would rather have that conversation than turn you away at the gate.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: disqualifier cards -->
+                <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-5 fade-up" style="transition-delay:.12s">
+
+                    <div class="disq-card p-6 bg-white">
+                        <div class="w-10 h-10 bg-[#D90429] flex items-center justify-center mb-4">
+                            <i class="bi bi-x-lg text-white font-semibold"></i>
+                        </div>
+                        <h4 class="text-base font-semibold uppercase tracking-tight text-black mb-2">Under the Influence</h4>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed">Any rider presenting at the briefing or departure with detectable alcohol or substances is immediately removed from the tour. No exceptions, no second chances on that trip.</p>
+                    </div>
+
+                    <div class="disq-card p-6 bg-white">
+                        <div class="w-10 h-10 bg-black flex items-center justify-center mb-4">
+                            <i class="bi bi-x-lg text-white font-semibold"></i>
+                        </div>
+                        <h4 class="text-base font-semibold uppercase tracking-tight text-black mb-2">Missing or Expired Documents</h4>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed">Expired licence, missing insurance, or incomplete medical declaration at check-in results in immediate disqualification. No document, no ride — regardless of advance payment status.</p>
+                    </div>
+
+                    <div class="disq-card p-6 bg-white">
+                        <div class="w-10 h-10 bg-[#D90429] flex items-center justify-center mb-4">
+                            <i class="bi bi-x-lg text-white font-semibold"></i>
+                        </div>
+                        <h4 class="text-base font-semibold uppercase tracking-tight text-black mb-2">Undisclosed Medical Conditions</h4>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed">If our medical officer uncovers a relevant undisclosed condition during the pre-ride check, the rider is grounded for their own safety and the safety of the group.</p>
+                    </div>
+
+                    <div class="disq-card p-6 bg-white">
+                        <div class="w-10 h-10 bg-black flex items-center justify-center mb-4">
+                            <i class="bi bi-x-lg text-white font-semibold"></i>
+                        </div>
+                        <h4 class="text-base font-semibold uppercase tracking-tight text-black mb-2">Failed Skills Assessment</h4>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed">Expert-tier riders who fail the SAR evaluation are offered a downgrade to a lower-difficulty tour at no extra cost. The original expert-tier slot is forfeited and refunded partially per policy.</p>
+                    </div>
+
+                    <div class="disq-card p-6 bg-white sm:col-span-2">
+                        <div class="w-10 h-10 bg-[#D90429] flex items-center justify-center mb-4">
+                            <i class="bi bi-x-lg text-white font-semibold"></i>
+                        </div>
+                        <h4 class="text-base font-semibold uppercase tracking-tight text-black mb-2">Non-Compliant Safety Gear</h4>
+                        <p class="text-gray-600 text-xs font-semibold leading-relaxed">Uncertified helmets (no ECE/ISI rating), missing armour in jacket or trousers, regular footwear, or bare-hand riding are all grounds for immediate disqualification. We offer loaner gear at an additional charge — but this is not guaranteed. Bring the right kit.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <script>
+        tailwind.config = {
+            theme:{ extend:{ fontFamily:{ sans:['Poppins','ui-sans-serif','system-ui'] } } }
+        }
+
+
+        /* ── Scroll Fade-in ───────────────────────── */
+        const observer = new IntersectionObserver(entries=>{
+            entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+        },{ threshold:0.07 });
+        document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+        /* ── Skill bars animate on scroll ────────── */
+        const barObserver = new IntersectionObserver(entries=>{
+            entries.forEach(e=>{
+                if(e.isIntersecting){
+                    e.target.querySelectorAll('.skill-bar-fill').forEach(bar=>{
+                        bar.style.width = bar.dataset.width;
+                    });
+                }
+            });
+        },{ threshold:0.3 });
+        document.querySelectorAll('.lvl-panel').forEach(p=>barObserver.observe(p));
+
+        /* ── Level Tabs ───────────────────────────── */
+        function switchLevel(level, btn){
+            document.querySelectorAll('.lvl-tab').forEach(t=>t.classList.remove('active'));
+            document.querySelectorAll('.lvl-panel').forEach(p=>p.classList.remove('active'));
+            btn.classList.add('active');
+            const panel = document.getElementById('panel-'+level);
+            panel.classList.add('active');
+            // animate skill bars in newly shown panel
+            setTimeout(()=>{
+                panel.querySelectorAll('.skill-bar-fill').forEach(bar=>{
+                    bar.style.width = bar.dataset.width;
+                });
+            },100);
+        }
+
+        /* ── Gear Checklist ───────────────────────── */
+        function toggleGearRow(row){
+            row.classList.toggle('checked');
+            updateGearProgress();
+        }
+        function updateGearProgress(){
+            const all     = document.querySelectorAll('.gear-row').length;
+            const done    = document.querySelectorAll('.gear-row.checked').length;
+            const pct     = Math.round((done/all)*100);
+            document.getElementById('gear-count').textContent = done+' / '+all;
+            document.getElementById('gear-fill').style.width  = pct+'%';
+            const status  = document.getElementById('gear-status');
+            if(done===0)      status.textContent='Click items to check them off';
+            else if(pct<50)   status.textContent='Getting there — keep packing';
+            else if(pct<100)  status.textContent='Almost ready — don\'t forget the rest';
+            else              status.textContent='✓ Fully kitted out. You\'re good to go.';
+        }
+        function resetGear(){
+            document.querySelectorAll('.gear-row').forEach(r=>r.classList.remove('checked'));
+            updateGearProgress();
+        }
+
+        /* ── FAQ Accordion ────────────────────────── */
+        function toggleAcc(btn){
+            const item   = btn.closest('.acc-item');
+            const body   = item.querySelector('.acc-body');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.acc-item').forEach(i=>{
+                i.classList.remove('open');
+                i.querySelector('.acc-body').classList.remove('open');
+            });
+            if(!isOpen){ item.classList.add('open'); body.classList.add('open'); }
+        }
+
+        /* ── Self-Assessment Quiz ─────────────────── */
+        function selectOption(el, group){
+            document.querySelectorAll(`[onclick*="${group}"]`).forEach(o=>o.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function evaluateQuiz(){
+            const answers = ['q1','q2','q3','q4'].map(q=>{
+                const sel = document.querySelector(`[onclick*="${q}"].selected`);
+                if(!sel) return -1;
+                const options = [...document.querySelectorAll(`[onclick*="${q}"]`)];
+                return options.indexOf(sel);
+            });
+
+            if(answers.includes(-1)){
+                alert('Please answer all 4 questions before evaluating.');
+                return;
+            }
+
+            const score = answers.reduce((a,b)=>a+b,0);
+            const resultEl   = document.getElementById('quiz-result');
+            const levelEl    = document.getElementById('result-level');
+            const textEl     = document.getElementById('result-text');
+
+            let level, text;
+            if(score <= 3){
+                level = '🟢 Beginner — Coastal Jungle Run';
+                text  = 'You\'re well suited to our beginner routes. The Coastal Jungle Run is perfect for building your ADV fundamentals on forgiving terrain with full guide support. Get your gear ready and book your first expedition.';
+            } else if(score <= 6){
+                level = '🟡 Intermediate — Spiti Assault';
+                text  = 'You have solid experience for our intermediate tier. The Spiti Assault will push your limits on technical mountain terrain while keeping you within a safety margin your skills can handle. Review the intermediate requirements checklist.';
+            } else if(score <= 9){
+                level = '🔴 Expert — The High Himalaya';
+                text  = 'Your experience and capabilities match our expert tier. You\'re cleared to attempt the Himalayan Crossing — subject to completing the Skills Assessment Ride (SAR) at our Chennai facility. Contact us to schedule it.';
+            } else {
+                level = '🌍 International — Northeast Frontier or Bhutan Circuit';
+                text  = 'Exceptional profile. You\'re ready for our most demanding international routes. These require additional documentation and 60-day advance planning. Reach out directly to our lead guide to begin the process.';
+            }
+
+            levelEl.textContent = level;
+            textEl.textContent  = text;
+            resultEl.classList.remove('hidden');
+            resultEl.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+</html>

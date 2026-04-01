@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* RTL */
+        .rtl {
+            direction: rtl;
+        }
+
+        [dir="rtl"] .title {
+            margin-right: 20px !important;
+        }
+
+        /* THEME TOGGLE */
+        :root {
+            --home-bg: #ffffff;
+            --text-color: #111111;
+        }
+
+        [data-theme="dark"] {
+            --home-bg: #000000;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--home-bg) !important;
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+
+        [data-theme="dark"] body,
+        [data-theme="dark"] p,
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4,
+        [data-theme="dark"] h5,
+        [data-theme="dark"] h6,
+        [data-theme="dark"] span,
+        [data-theme="dark"] li,
+        [data-theme="dark"] a,
+        [data-theme="dark"] label,
+        [data-theme="dark"] small,
+        [data-theme="dark"] strong {
+            color: #ffffff !important;
+        }
+        @media (max-width:770px){
+            .image{
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- navbar -->
+    <div id="navbar"></div>
+
+    <!-- HERO BANNER -->
+<section class="relative h-screen w-full flex items-center justify-center bg-black overflow-hidden">
+    
+    <div class="absolute inset-0 z-0">
+        <img src="images/img12.avif" 
+             alt="Road Background" 
+             class="w-full h-full object-cover opacity-30 scale-125 transition-transform duration-[3000ms] hover:scale-100">
+        
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)0%,rgba(0,0,0,0.9)100%)]"></div>
+        
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-[#D90429] rounded-full blur-[150px] opacity-20"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-5xl px-6 text-center">
+        
+        <div class="inline-flex items-center gap-3 mb-8 px-5 py-2 border-l-4 border-[#D90429] bg-white/5 backdrop-blur-sm">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D90429] opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#D90429]"></span>
+            </span>
+            <span class="text-white text-[10px] font-semibold uppercase tracking-[0.5em]">Redline Support Hub</span>
+        </div>
+
+        <h1 class="text-4xl md:text-8xl font-semibold text-white uppercase tracking-tighter leading-[0.85] mb-12">
+            GOT <span class="text-[#D90429]">QUESTIONS?</span><br>
+            WE HAVE <span class="text-white/20 outline-text">ANSWERS.</span>
+        </h1>
+
+        <div class="relative max-w-3xl mx-auto group">
+            <div class="absolute -inset-1 bg-[#D90429] opacity-0 group-focus-within:opacity-20 blur-xl transition duration-700"></div>
+            
+            <div class="relative flex items-center bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 group-focus-within:bg-white">
+                <div class="pl-6 text-[#D90429]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="text" 
+                       placeholder="WHAT'S ON YOUR MIND? (E.G. REFUNDS, BIKE MODELS, INSURANCE)" 
+                       class="w-full py-7 px-6 bg-transparent text-white group-focus-within:text-black font-semibold uppercase tracking-widest text-xs focus:outline-none placeholder:text-gray-500">
+                <button class="mr-2 bg-[#D90429] text-white px-10 py-5 font-semibold uppercase tracking-widest text-xs hover:bg-black transition-all duration-300 transform active:scale-95">
+                    Search
+                </button>
+            </div>
+        </div>
+
+</section>
+<!-- SECTION1 -->
+ <section class="py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+        
+        <div class="text-center mb-20">
+            <div class="inline-block px-4 py-1 border border-[#D90429] mb-4 skew-x-[-12deg]">
+                <span class="text-[#D90429] text-[10px] font-semibold uppercase tracking-[0.4em]">Knowledge Base</span>
+            </div>
+            <h2 class="text-5xl md:text-7xl font-semibold uppercase tracking-tighter text-black">
+                INTEL <span class="text-[#D90429]">LOGS.</span>
+            </h2>
+            <p class="text-gray-400 font-semibold uppercase tracking-[0.3em] text-xs mt-4">
+                everything you need to know before hitting the redline.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            
+            <div class="border border-gray-100 bg-gray-50/30 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-1" class="hidden peer" checked>
+                <label for="faq-1" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold  text-black group-hover:text-[#D90429] transition-colors">
+                        01. What is the minimum age for 1000cc rentals?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        To pilot any machine over 1000cc, riders must be at least 25 years of age and possess a minimum of 3 years of heavy-motorcycle riding experience.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-2" class="hidden peer">
+                <label for="faq-2" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold  text-black group-hover:text-[#D90429] transition-colors">
+                        02. Do you provide riding gear like helmets and gloves?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        Yes. Every rental includes a DOT-approved helmet. Premium gear sets (AlpineStars/Dainese) are available for an additional $45/day.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-3" class="hidden peer">
+                <label for="faq-3" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold  text-black group-hover:text-[#D90429] transition-colors">
+                        03. Is there a mileage limit on daily rentals?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        Standard rentals include 300km per day. Unlimited mileage packages can be added at checkout for $25/day. Excess is billed at $0.50/km.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-4" class="hidden peer">
+                <label for="faq-4" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        04. What happens if i have a mechanical failure on the road?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold  text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        We provide 24/7 roadside assistance. If the bike cannot be repaired within 4 hours, we will dispatch a replacement machine.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-5" class="hidden peer">
+                <label for="faq-5" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        05. Can i cross international borders with the bike?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        Cross-border travel is permitted for specific "Expedition" bikes only. You must notify us 14 days in advance for permits.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-6" class="hidden peer">
+                <label for="faq-6" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        06. How much is the security deposit?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        Security deposits range from $1,000 to $3,500 depending on the bike value. This is a hold on your credit card.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-7" class="hidden peer">
+                <label for="faq-7" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        07. Do you offer long-term rental discounts?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        Yes. Rentals longer than 7 days receive a 15% discount. Monthly rentals qualify for our "Nomad Rate" of 30% off.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-8" class="hidden peer">
+                <label for="faq-8" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        08. Can i return the bike to a different city?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        One-way rentals are available between our major hubs for a flat relocation fee of $250.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-9" class="hidden peer">
+                <label for="faq-9" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        09. Is insurance included in the price?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        Basic third-party liability is included. We highly recommend our "Full Shield" CDW (Collision Damage Waiver) for total peace of mind.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-sm overflow-hidden">
+                <input type="radio" name="faq-group" id="faq-10" class="hidden peer">
+                <label for="faq-10" class="flex items-center justify-between p-8 cursor-pointer group">
+                    <span class="text-xl md:text-2xl font-semibold text-black group-hover:text-[#D90429] transition-colors">
+                        10. What happens if i return the bike late?
+                    </span>
+                    <div class="relative w-6 h-6 flex items-center justify-center">
+                        <span class="absolute w-full h-[2px] bg-[#D90429]"></span>
+                        <span class="absolute w-[2px] h-full bg-[#D90429] transition-transform duration-500 peer-checked:rotate-90"></span>
+                    </div>
+                </label>
+                <div class="max-h-0 overflow-hidden transition-all duration-500 peer-checked:max-h-96">
+                    <p class="px-8 pb-10 text-gray-500 font-semibold  text-[13px] leading-loose max-w-3xl border-t border-gray-100 pt-6">
+                        We offer a 1-hour grace period. Returns exceeding this window are billed at a flat rate of $50 per hour.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Radio logic for icon rotation */
+    #faq-1:checked ~ label div span:nth-child(2),
+    #faq-2:checked ~ label div span:nth-child(2),
+    #faq-3:checked ~ label div span:nth-child(2),
+    #faq-4:checked ~ label div span:nth-child(2),
+    #faq-5:checked ~ label div span:nth-child(2),
+    #faq-6:checked ~ label div span:nth-child(2),
+    #faq-7:checked ~ label div span:nth-child(2),
+    #faq-8:checked ~ label div span:nth-child(2),
+    #faq-9:checked ~ label div span:nth-child(2),
+    #faq-10:checked ~ label div span:nth-child(2) {
+        transform: rotate(90deg);
+        opacity: 0;
+    }
+</style>
+
+<style>
+    @keyframes scroll-down {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+    }
+    .animate-scroll-down {
+        animation: scroll-down 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    }
+    .outline-text {
+        -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    }
+</style>
+<!-- SECTION2 -->
+ <section class="py-24 bg-black overflow-hidden relative">
+    
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-[#D90429] skew-x-[-12deg] translate-x-32 opacity-10"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+            
+            <div class="lg:w-1/2 text-center lg:text-left">
+                <div class="inline-block px-4 py-1 bg-[#D90429] mb-6 skew-x-[-12deg]">
+                    <span class="text-white text-[10px] font-semibold uppercase tracking-[0.4em]">End of the line</span>
+                </div>
+                <h2 class="text-5xl md:text-7xl font-semibold text-white uppercase tracking-tighter leading-none mb-6">
+                    still lost in <br><span class="text-[#D90429]">the dust?</span>
+                </h2>
+                <p class="text-gray-400 font-semibold uppercase tracking-widest text-xs max-w-md mx-auto lg:mx-0 leading-loose">
+                    if our logs didn't cover your mission parameters, our tactical support team is standing by to assist.
+                </p>
+            </div>
+
+            <div class="lg:w-1/2 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                
+                <a href="#" class="card group relative flex-1 bg-white p-8 overflow-hidden transition-all duration-500 hover:bg-[#D90429]">
+                    <div class="relative z-10">
+                        <p class="text-black group-hover:text-white font-semibold uppercase tracking-tighter text-3xl mb-1 transition-colors">Direct Support</p>
+                        <p class="text-gray-400 group-hover:text-white/80 font-semibold uppercase tracking-[0.2em] text-[10px] transition-colors">Response in < 15 mins</p>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 opacity-5 group-hover:opacity-20 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="group relative flex-1 border border-white/20 p-8 overflow-hidden transition-all duration-500 hover:border-[#D90429]">
+                    <div class="relative z-10">
+                        <p class="text-white font-semibold uppercase tracking-tighter text-3xl mb-1">Join the Crew</p>
+                        <p class="text-gray-500 group-hover:text-[#D90429] font-semibold uppercase tracking-[0.2em] text-[10px] transition-colors">Daily intel on Discord</p>
+                    </div>
+                    <div class="mt-4 flex items-center gap-2 text-[#D90429] opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0">
+                        <span class="font-semibold uppercase text-[10px] tracking-widest">Connect Now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D90429] to-transparent opacity-30"></div>
+</section>
+           <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+                    },
+                },
+            },
+        }
+        lucide.createIcons();
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

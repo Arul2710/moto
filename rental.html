@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentals - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ══ THEME ══════════════════════════════════════ */
+        :root { --bg:#fff; --fg:#111; }
+        [data-theme="dark"] { --bg:#000; --fg:#fff; }
+
+        body {
+            background-color: var(--bg) !important;
+            color: var(--fg);
+            transition: background-color .4s ease, color .4s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card { background-color:#000 !important; }
+        [data-theme="dark"] body,[data-theme="dark"] p,[data-theme="dark"] h1,
+        [data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4,
+        [data-theme="dark"] h5,[data-theme="dark"] h6,[data-theme="dark"] span,
+        [data-theme="dark"] li,[data-theme="dark"] a,[data-theme="dark"] label,
+        [data-theme="dark"] small,[data-theme="dark"] strong { color:#fff !important; }
+
+        /* ══ HERO ═══════════════════════════════════════ */
+        .hero-rentals {
+            min-height: 100vh;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+        /* animated diagonal stripes bg */
+        .hero-stripes {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                -55deg,
+                transparent,
+                transparent 60px,
+                rgba(217,4,41,0.04) 60px,
+                rgba(217,4,41,0.04) 61px
+            );
+            pointer-events: none;
+        }
+        .hero-spotlight {
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 70%;
+            height: 140%;
+            background: radial-gradient(ellipse at center, rgba(217,4,41,0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero-bike-panel {
+            position: absolute;
+            top: 0; right: 0;
+            width: 52%;
+            height: 100%;
+            background: #111;
+            clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        .hero-bike-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .55;
+            mix-blend-mode: luminosity;
+        }
+        @media(max-width:1023px){
+            .hero-bike-panel {
+                width:100%; clip-path:none; opacity:.18;
+                position:absolute; inset:0;
+            }
+        }
+
+        /* ══ MARQUEE ════════════════════════════════════ */
+        .marquee-track {
+            display:flex; width:max-content;
+            animation: marquee 22s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform:translateX(0); }
+            to   { transform:translateX(-50%); }
+        }
+
+        /* ══ BIKE SHOWCASE CARD ═════════════════════════ */
+        .bike-card {
+            border: 2px solid #e5e7eb;
+            transition: border-color .3s, transform .35s, box-shadow .35s;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+        }
+        .bike-card::before {
+            content:'';
+            position:absolute;
+            bottom:0; left:0;
+            width:0; height:4px;
+            background:#D90429;
+            transition: width .4s ease;
+        }
+        .bike-card:hover::before { width:100%; }
+        .bike-card:hover {
+            border-color:#D90429;
+            transform:translateY(-8px);
+            box-shadow:0 24px 50px rgba(0,0,0,0.12);
+        }
+        .bike-card img {
+            transition: transform .6s ease;
+        }
+        .bike-card:hover img { transform: scale(1.06); }
+        .bike-card .avail-dot {
+            width:8px; height:8px;
+            border-radius:50%;
+            display:inline-block;
+        }
+        .avail-dot.available { background:#22c55e; box-shadow:0 0 0 3px rgba(34,197,94,.2); }
+        .avail-dot.limited   { background:#f59e0b; box-shadow:0 0 0 3px rgba(245,158,11,.2); }
+        .avail-dot.booked    { background:#6b7280; }
+
+        /* ══ SPEC TABLE ═════════════════════════════════ */
+        .spec-row { border-bottom:1px solid #f3f4f6; }
+        .spec-row:last-child { border:none; }
+        [data-theme="dark"] .spec-row { border-color:#1f1f1f; }
+
+
+
+        /* ══ RENTAL TIERS ═══════════════════════════════ */
+        .tier-card {
+            position:relative;
+            border:2px solid #000;
+            transition: transform .3s, box-shadow .3s;
+            overflow:hidden;
+        }
+        .tier-card:hover {
+            transform:translateY(-6px);
+            box-shadow:8px 8px 0 #D90429;
+        }
+        .tier-card.featured {
+            border-color:#D90429;
+            background:#D90429;
+        }
+        .tier-card.featured:hover {
+            box-shadow:8px 8px 0 #000;
+        }
+        .tier-ribbon {
+            position:absolute;
+            top:18px; right:-28px;
+            background:#000;
+            color:#fff;
+            font-size:.55rem;
+            font-weight:900;
+            text-transform:uppercase;
+            letter-spacing:.2em;
+            padding:.3rem 2.5rem;
+            transform:rotate(35deg);
+        }
+
+        /* ══ GEAR ADD-ONS ═══════════════════════════════ */
+        .gear-item {
+            border:2px solid #e5e7eb;
+            transition: border-color .25s, background .25s;
+            cursor:pointer;
+            position:relative;
+        }
+        .gear-item:hover { border-color:#D90429; }
+        .gear-item.selected {
+            border-color:#D90429;
+            background:#D90429;
+        }
+        .gear-item.selected * { color:#fff !important; }
+        .gear-check {
+            position:absolute; top:10px; right:10px;
+            width:20px; height:20px;
+            background:#fff;
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            opacity:0;
+            transition:opacity .2s;
+        }
+        .gear-item.selected .gear-check { opacity:1; }
+
+        /* ══ BOOKING CALCULATOR ═════════════════════════ */
+        .calc-input {
+            border:2px solid #000;
+            padding:.75rem 1rem;
+            font-family:'Poppins',sans-serif;
+            font-weight:700;
+            font-size:.85rem;
+            width:100%;
+            background:transparent;
+            color:inherit;
+            outline:none;
+            transition:border-color .2s;
+        }
+        .calc-input:focus { border-color:#D90429; }
+        .calc-select {
+            border:2px solid #000;
+            padding:.75rem 1rem;
+            font-family:'Poppins',sans-serif;
+            font-weight:700;
+            font-size:.85rem;
+            width:100%;
+            background:#fff;
+            color:#000;
+            outline:none;
+            cursor:pointer;
+            appearance:none;
+            transition:border-color .2s;
+        }
+        .calc-select:focus { border-color:#D90429; }
+        [data-theme="dark"] .calc-select { background:#111; color:#fff; }
+        [data-theme="dark"] .calc-input { border-color:#444; }
+        [data-theme="dark"] .calc-select { border-color:#444; }
+        /* ══ PROCESS RINGS ══════════════════════════════ */
+        .ring-step {
+            display:flex; align-items:flex-start; gap:1.5rem;
+            position:relative; padding-bottom:2.5rem;
+        }
+        .ring-step::after {
+            content:''; position:absolute;
+            left:1.6rem; top:3.8rem; bottom:0;
+            width:2px; background:#e5e7eb;
+        }
+        .ring-step:last-child::after { display:none; }
+        [data-theme="dark"] .ring-step::after { background:#222; }
+        .ring-num {
+            width:52px; height:52px; flex-shrink:0;
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-weight:900; font-size:1.1rem;
+            border:3px solid #D90429;
+            color:#D90429;
+            background:transparent;
+            transition: background .3s, color .3s;
+        }
+        .ring-step:hover .ring-num {
+            background:#D90429; color:#fff;
+        }
+
+        /* ══ TESTIMONIAL TICKER ═════════════════════════ */
+        .review-card {
+            min-width:340px;
+            border:2px solid #e5e7eb;
+            background:#fff;
+            padding:2rem;
+            flex-shrink:0;
+        }
+        [data-theme="dark"] .review-card { background:#0a0a0a; border-color:#222; }
+
+        /* ══ FADE-UP ════════════════════════════════════ */
+        .fade-up {
+            opacity:0; transform:translateY(36px);
+            transition:opacity .7s ease, transform .7s ease;
+        }
+        .fade-up.visible { opacity:1; transform:translateY(0); }
+
+        /* ══ DARK OVERRIDES ═════════════════════════════ */
+        [data-theme="dark"] .bike-card { background:#0a0a0a !important; border-color:#222; }
+        [data-theme="dark"] .bike-card:hover { border-color:#D90429; }
+        [data-theme="dark"] .tier-card { border-color:#fff; background:#0a0a0a; }
+        [data-theme="dark"] .tier-card.featured { background:#D90429; border-color:#D90429; }
+        [data-theme="dark"] .gear-item { border-color:#333; background:#0a0a0a; }
+        [data-theme="dark"] .bg-white { background:#000 !important; }
+        [data-theme="dark"] .bg-gray-50 { background:#0a0a0a !important; }
+        [data-theme="dark"] .bg-gray-100 { background:#111 !important; }
+        [data-theme="dark"] .border-black { border-color:#fff !important; }
+        [data-theme="dark"] .border-gray-200 { border-color:#222 !important; }
+        [data-theme="dark"] .text-black { color:#fff !important; }
+        [data-theme="dark"] .text-gray-600 { color:#aaa !important; }
+        [data-theme="dark"] .text-gray-500 { color:#888 !important; }
+        [data-theme="dark"] .text-gray-400 { color:#666 !important; }
+    </style>
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         HERO — SPLIT LAYOUT
+    ═══════════════════════════════════════════════ -->
+    <section class="hero-rentals">
+        <div class="hero-stripes"></div>
+        <div class="hero-spotlight"></div>
+
+        <div class="hero-bike-panel">
+            <img src="images/bike1.jpg" alt="Fleet Hero" />
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-28 w-full">
+            <div class="max-w-xl">
+
+                <div class="flex items-center gap-3 mb-7">
+                    <div class="w-8 h-0.5 bg-[#D90429]"></div>
+                    <p class="text-[#D90429] uppercase tracking-[0.45em] font-semibold text-xs">The Fleet · 2026</p>
+                </div>
+
+                <h1 class="italic text-white text-5xl sm:text-6xl md:text-8xl font-semibold uppercase tracking-tighter leading-[0.86] mb-8">
+                    RENT THE<br>
+                    <span class="text-[#D90429]">BEAST.</span>
+                </h1>
+
+                <p class="text-gray-400 text-base md:text-lg font-semibold leading-relaxed mb-10 max-w-md">
+                    Pick your weapon. Our machines are dialled, modified, and ready for anything you throw at them — daily, weekly, or expedition-length.
+                </p>
+
+                <!-- inline quick stats -->
+                <div class="grid grid-cols-3 gap-0 border border-gray-700 mb-10 max-w-sm">
+                    <div class="p-5 border-r border-gray-700 text-center">
+                        <p class="text-white text-2xl font-semibold leading-none">12</p>
+                        <p class="text-gray-500 text-[9px] font-semibold uppercase tracking-widest mt-1">Bikes in Fleet</p>
+                    </div>
+                    <div class="p-5 border-r border-gray-700 text-center">
+                        <p class="text-[#D90429] text-2xl font-semibold leading-none">₹3K</p>
+                        <p class="text-gray-500 text-[9px] font-semibold uppercase tracking-widest mt-1">Starts From</p>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="text-white text-2xl font-semibold leading-none">24h</p>
+                        <p class="text-gray-500 text-[9px] font-semibold uppercase tracking-widest mt-1">Confirm Time</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="rental.html"
+                        class="btn1 px-10 py-4 bg-[#D90429] text-white font-semibold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all duration-300">
+                        Browse the Fleet
+                    </a>
+                    <a href="contact.html"
+                        class="px-10 py-4 border-2 border-gray-600 text-white font-semibold uppercase tracking-widest text-xs hover:border-[#D90429] hover:text-[#D90429] transition-all duration-300">
+                        Calculate Your Cost
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom red bar -->
+        <div class="absolute bottom-0 left-0 w-full h-2 bg-[#D90429]"></div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
+         WHY RENT WITH US — HORIZONTAL FEATURE STRIP
+    ═══════════════════════════════════════════════ -->
+    <section class="py-20 bg-black border-b-4 border-[#D90429]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 divide-x divide-gray-800">
+
+                <div class="px-8 py-6 text-center fade-up">
+                    <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-tools"></i></div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-tight mb-2">Pre-Ride Inspected</h4>
+                    <p class="text-gray-500 text-xs font-semibold leading-relaxed">Every bike signed off by our head mechanic before it leaves the garage.</p>
+                </div>
+
+                <div class="px-8 py-6 text-center fade-up" style="transition-delay:.07s">
+                    <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-geo-alt-fill"></i></div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-tight mb-2">GPS Included Free</h4>
+                    <p class="text-gray-500 text-xs font-semibold leading-relaxed">Preloaded with Redline-curated routes for every terrain type.</p>
+                </div>
+
+                <div class="px-8 py-6 text-center fade-up" style="transition-delay:.14s">
+                    <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-telephone-fill"></i></div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-tight mb-2">24/7 Breakdown Cover</h4>
+                    <p class="text-gray-500 text-xs font-semibold leading-relaxed">Call our mechanic hotline anytime. Support vehicle dispatched within 2 hours.</p>
+                </div>
+
+                <div class="px-8 py-6 text-center fade-up" style="transition-delay:.21s">
+                    <div class="text-[#D90429] text-4xl mb-4"><i class="bi bi-shield-fill-check"></i></div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-tight mb-2">Insurance Bundled</h4>
+                    <p class="text-gray-500 text-xs font-semibold leading-relaxed">Comprehensive cover on every rental — third-party and own-damage.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         THE FLEET — EXPANDABLE BIKE CARDS
+    ═══════════════════════════════════════════════ -->
+    <section id="fleet" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 fade-up">
+                <div>
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-3">Hand-Built, Always Ready</h3>
+                    <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                        CHOOSE YOUR <span class="text-[#D90429]">WEAPON.</span>
+                    </h2>
+                </div>
+                <p class="text-gray-500 text-xs font-semibold uppercase tracking-widest max-w-xs text-right hidden md:block">
+                    Click any card to reserve your machine and start your journey.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+                <!-- ── BIKE 1: BMW R1250 GS ── -->
+                <div class="bike-card" id="card-bmw">
+                    <div class="overflow-hidden aspect-[16/10] bg-gray-50">
+                        <img src="images/bike1.png" alt="BMW R1250 GS" class="w-full h-full object-contain p-6" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-1">
+                            <div>
+                                <h3 class="text-2xl font-semibold uppercase tracking-tighter text-black">BMW R1250 GS</h3>
+                                <p class="text-[#D90429] text-[10px] font-semibold uppercase tracking-widest mt-0.5">The Heavyweight King</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-semibold text-black">₹8,500</p>
+                                <p class="text-[10px] text-gray-400 font-semibold">/day</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3 mb-5">
+                            <span class="avail-dot available"></span>
+                            <span class="text-xs font-semibold uppercase tracking-widest text-green-600">Available</span>
+                            <span class="text-gray-300 mx-2">|</span>
+                            <span class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">3 Units</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-5">
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-semibold text-gray-400 uppercase">Engine</p>
+                                <p class="text-xs font-semibold text-black">1254cc</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-semibold text-gray-400 uppercase">Power</p>
+                                <p class="text-xs font-semibold text-black">136 hp</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-semibold text-gray-400 uppercase">Weight</p>
+                                <p class="text-xs font-semibold text-black">249 kg</p>
+                            </div>
+                        </div>
+                        <a href="contact.html"
+                            class="block w-full py-3 border-2 border-black text-black font-semibold uppercase tracking-widest text-xs text-center hover:bg-[#D90429] hover:border-[#D90429] hover:text-white transition-all duration-300">
+                            Reserve This Bike
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── BIKE 2: KTM 890 R ── -->
+                <div class="bike-card" id="card-ktm">
+                    <div class="overflow-hidden aspect-[16/10] bg-gray-50">
+                        <img src="images/bike2.webp" alt="KTM 890 R" class="w-full h-full object-contain p-6" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-1">
+                            <div>
+                                <h3 class="text-2xl font-semibold uppercase tracking-tighter text-black">KTM 890 R</h3>
+                                <p class="text-[#D90429] text-[10px] font-semibold uppercase tracking-widest mt-0.5">Off-Road Specialist</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-semibold text-black">₹6,500</p>
+                                <p class="text-[10px] text-gray-400 font-semibold">/day</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3 mb-5">
+                            <span class="avail-dot available"></span>
+                            <span class="text-xs font-semibold uppercase tracking-widest text-green-600">Available</span>
+                            <span class="text-gray-300 mx-2">|</span>
+                            <span class="text-[10px] font-semibold uppercase tracking-widest text-gray-400">4 Units</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-5">
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-semibold text-gray-400 uppercase">Engine</p>
+                                <p class="text-xs font-semibold text-black">889cc</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-semibold text-gray-400 uppercase">Power</p>
+                                <p class="text-xs font-semibold text-black">105 hp</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-semibold text-gray-400 uppercase">Weight</p>
+                                <p class="text-xs font-semibold text-black">189 kg</p>
+                            </div>
+                        </div>
+                        <a href="contact.html"
+                            class="block w-full py-3 border-2 border-black text-black font-semibold uppercase tracking-widest text-xs text-center hover:bg-[#D90429] hover:border-[#D90429] hover:text-white transition-all duration-300">
+                            Reserve This Bike
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── BIKE 3: Himalayan 450 ── -->
+                <div class="bike-card" id="card-himalayan">
+                    <div class="overflow-hidden aspect-[16/10] bg-gray-50">
+                        <img src="images/bike8.png" alt="Himalayan 450" class="w-full h-full object-contain p-6" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-1">
+                            <div>
+                                <h3 class="text-2xl font-black uppercase tracking-tighter text-black">Himalayan 450</h3>
+                                <p class="text-[#D90429] text-[10px] font-black uppercase tracking-widest mt-0.5">The Everyman's ADV</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-black text-black">₹3,500</p>
+                                <p class="text-[10px] text-gray-400 font-black">/day</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3 mb-5">
+                            <span class="avail-dot limited"></span>
+                            <span class="text-xs font-black uppercase tracking-widest text-amber-500">Limited</span>
+                            <span class="text-gray-300 mx-2">|</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">2 Units Left</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-5">
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Engine</p>
+                                <p class="text-xs font-black text-black">452cc</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Power</p>
+                                <p class="text-xs font-black text-black">40 hp</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Weight</p>
+                                <p class="text-xs font-black text-black">196 kg</p>
+                            </div>
+                        </div>
+                        <a href="contact.html"
+                            class="block w-full py-3 border-2 border-black text-black font-black uppercase tracking-widest text-xs text-center hover:bg-[#D90429] hover:border-[#D90429] hover:text-white transition-all duration-300">
+                            Reserve This Bike
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── BIKE 4: Triumph Tiger 900 ── -->
+                <div class="bike-card" id="card-tiger">
+                    <div class="overflow-hidden aspect-[16/10] bg-gray-50">
+                        <img src="images/bike9.avif" alt="Triumph Tiger 900" class="w-full h-full object-contain p-6" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-1">
+                            <div>
+                                <h3 class="text-2xl font-black uppercase tracking-tighter text-black">Triumph Tiger 900</h3>
+                                <p class="text-[#D90429] text-[10px] font-black uppercase tracking-widest mt-0.5">British Grit, Indian Dirt</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-black text-black">₹7,200</p>
+                                <p class="text-[10px] text-gray-400 font-black">/day</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3 mb-5">
+                            <span class="avail-dot available"></span>
+                            <span class="text-xs font-black uppercase tracking-widest text-green-600">Available</span>
+                            <span class="text-gray-300 mx-2">|</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">2 Units</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-5">
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Engine</p>
+                                <p class="text-xs font-black text-black">888cc</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Power</p>
+                                <p class="text-xs font-black text-black">95 hp</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Weight</p>
+                                <p class="text-xs font-black text-black">193 kg</p>
+                            </div>
+                        </div>
+                        <a href="contact.html"
+                            class="block w-full py-3 border-2 border-black text-black font-black uppercase tracking-widest text-xs text-center hover:bg-[#D90429] hover:border-[#D90429] hover:text-white transition-all duration-300">
+                            Reserve This Bike
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── BIKE 5: Honda Africa Twin ── -->
+                <div class="bike-card" id="card-twin">
+                    <div class="overflow-hidden aspect-[16/10] bg-gray-50">
+                        <img src="images/bike10.png" alt="Honda Africa Twin" class="w-full h-full object-contain p-6" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-1">
+                            <div>
+                                <h3 class="text-2xl font-black uppercase tracking-tighter text-black">Africa Twin</h3>
+                                <p class="text-[#D90429] text-[10px] font-black uppercase tracking-widest mt-0.5">Legendary Reliability</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-black text-black">₹7,000</p>
+                                <p class="text-[10px] text-gray-400 font-black">/day</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3 mb-5">
+                            <span class="avail-dot limited"></span>
+                            <span class="text-xs font-black uppercase tracking-widest text-amber-500">Limited</span>
+                            <span class="text-gray-300 mx-2">|</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">1 Unit Left</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-5">
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Engine</p>
+                                <p class="text-xs font-black text-black">1084cc</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Power</p>
+                                <p class="text-xs font-black text-black">102 hp</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Weight</p>
+                                <p class="text-xs font-black text-black">226 kg</p>
+                            </div>
+                        </div>
+                        <a href="contact.html"
+                            class="block w-full py-3 border-2 border-black text-black font-black uppercase tracking-widest text-xs text-center hover:bg-[#D90429] hover:border-[#D90429] hover:text-white transition-all duration-300">
+                            Reserve This Bike
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── BIKE 6: Versys 1000 ── -->
+                <div class="bike-card" id="card-versys">
+                    <div class="overflow-hidden aspect-[16/10] bg-gray-50">
+                        <img src="images/bike11.jpg" alt="Versys 1000" class="w-full h-full object-contain p-6" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-1">
+                            <div>
+                                <h3 class="text-2xl font-black uppercase tracking-tighter text-black">Versys 1000</h3>
+                                <p class="text-[#D90429] text-[10px] font-black uppercase tracking-widest mt-0.5">Tarmac Dominator</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-black text-black">₹6,000</p>
+                                <p class="text-[10px] text-gray-400 font-black">/day</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-3 mb-5">
+                            <span class="avail-dot booked"></span>
+                            <span class="text-xs font-black uppercase tracking-widest text-gray-400">Booked Out</span>
+                            <span class="text-gray-300 mx-2">|</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#D90429]">Waitlist Open</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-5">
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Engine</p>
+                                <p class="text-xs font-black text-black">1043cc</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Power</p>
+                                <p class="text-xs font-black text-black">120 hp</p>
+                            </div>
+                            <div class="bg-gray-50 p-2.5 text-center">
+                                <p class="text-[9px] font-black text-gray-400 uppercase">Weight</p>
+                                <p class="text-xs font-black text-black">254 kg</p>
+                            </div>
+                        </div>
+                        <a href="contact.html"
+                            class="block w-full py-3 border-2 border-gray-300 text-gray-400 font-black uppercase tracking-widest text-xs text-center hover:border-[#D90429] hover:text-[#D90429] transition-all duration-300">
+                            Join Waitlist
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         RENTAL PLANS — TIER CARDS
+    ═══════════════════════════════════════════════ -->
+    <section class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col items-center text-center mb-16">
+            <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Pick Your Plan</h3>
+            <h2 class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none">
+                RENTAL <span class="text-[#D90429]">PACKAGES.</span>
+            </h2>
+            <p class="mt-5 text-gray-500 text-sm font-semibold uppercase tracking-widest max-w-xl">
+                The longer you ride, the more you save. All prices per bike, all-inclusive.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+            <div class="group p-8 bg-white border border-gray-100 transition-all duration-300 transform hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[#D90429] relative overflow-hidden">
+                <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-400 mb-2">Plan 01</p>
+                <h3 class="text-2xl font-semibold uppercase tracking-tighter text-black mb-1">Day Rider</h3>
+                <p class="text-[#D90429] text-xs font-semibold uppercase tracking-widest mb-6">1–3 Days</p>
+                <p class="text-5xl font-semibold text-black mb-1">₹3K–8.5K</p>
+                <p class="text-xs text-gray-400 font-semibold mb-8">/day · varies by bike</p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-sm font-semibold text-gray-700"><i class="bi bi-check2 text-[#D90429]"></i>Pre-ride inspection</li>
+                    <li class="flex items-center gap-3 text-sm font-semibold text-gray-700"><i class="bi bi-check2 text-[#D90429]"></i>GPS Included</li>
+                </ul>
+                <a href="contact.html" class="block w-full py-3 border-2 border-black text-black font-semibold uppercase tracking-widest text-xs text-center transition-all duration-300 group-hover:bg-[#D90429] group-hover:border-[#D90429] group-hover:text-white">
+                    Book Day Rental
+                </a>
+            </div>
+
+            <div class="group relative p-8 bg-[#D90429] transition-all duration-500 transform hover:scale-105 hover:rotate-1 hover:shadow-[0_20px_50px_rgba(217,4,41,0.3)] overflow-hidden">
+                <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-red-200 mb-2">Plan 02</p>
+                <h3 class="text-2xl font-semibold uppercase tracking-tighter text-white mb-1">Tour Rider</h3>
+                <p class="text-red-200 text-xs font-semibold uppercase tracking-widest mb-6">4–13 Days</p>
+                <p class="text-5xl font-semibold text-white mb-1">-15%</p>
+                <p class="text-xs text-red-200 font-semibold mb-8">off daily rate</p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-sm font-semibold text-white"><i class="bi bi-check2"></i>Everything in Day Rider</li>
+                    <li class="flex items-center gap-3 text-sm font-semibold text-white"><i class="bi bi-check2"></i>24/7 Hotline</li>
+                </ul>
+                <a href="contact.html" class="btn1 block w-full py-3 bg-black text-white font-semibold uppercase tracking-widest text-xs text-center transition-all duration-300 group-hover:bg-white group-hover:text-black">
+                    Book Tour Rental
+                </a>
+            </div>
+
+            <div class="group p-8 bg-white border border-gray-100 transition-all duration-300 transform hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[#D90429] relative overflow-hidden">
+                <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-400 mb-2">Plan 03</p>
+                <h3 class="text-2xl font-semibold uppercase tracking-tighter text-black mb-1">Expedition</h3>
+                <p class="text-[#D90429] text-xs font-semibold uppercase tracking-widest mb-6">14+ Days</p>
+                <p class="text-5xl font-semibold text-black mb-1">-25%</p>
+                <p class="text-xs text-gray-400 font-semibold mb-8">off daily rate</p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-sm font-semibold text-gray-700"><i class="bi bi-check2 text-[#D90429]"></i>Dedicated sweep rider</li>
+                    <li class="flex items-center gap-3 text-sm font-semibold text-gray-700"><i class="bi bi-check2 text-[#D90429]"></i>Free gear bundle</li>
+                </ul>
+                <a href="contact.html" class="block w-full py-3 bg-black text-white font-semibold uppercase tracking-widest text-xs text-center transition-all duration-300 group-hover:bg-[#D90429]">
+                    Book Expedition
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- ═══════════════════════════════════════════════
+         GEAR ADD-ONS
+    ═══════════════════════════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+
+                <!-- Left label -->
+                <div class="lg:col-span-2 fade-up">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs mb-4">Optional Add-Ons</h3>
+                    <h2 class="text-black text-4xl md:text-5xl font-semibold uppercase tracking-tighter leading-none mb-6">
+                        KIT UP<br><span class="text-[#D90429]">YOUR RIDE.</span>
+                    </h2>
+                    <p class="text-gray-500 text-sm font-semibold leading-relaxed mb-6">
+                        Everything below can be added to any rental. Click to select — your total updates automatically.
+                    </p>
+                    <div class="bg-black p-6 mt-4">
+                        <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#D90429] mb-2">Selected Add-ons Total</p>
+                        <p class="text-white text-4xl font-semibold" id="addon-total">₹0</p>
+                        <p class="text-gray-500 text-[10px] font-semibold uppercase tracking-widest mt-1">/day extra</p>
+                    </div>
+                </div>
+
+                <!-- Right gear grid -->
+                <div class="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-4 fade-up" style="transition-delay:.12s">
+
+                    <div class="gear-item p-4 text-center" onclick="toggleGear(this, 800)" data-price="800">
+                        <div class="gear-check"><i class="bi bi-check text-[#D90429] text-xs font-semibold"></i></div>
+                        <i class="bi bi-camera-video-fill text-3xl text-gray-600 mb-3 block"></i>
+                        <h4 class="text-xs font-semibold uppercase tracking-tight text-black mb-1">GoPro Hero 12</h4>
+                        <p class="text-[10px] text-gray-400 font-semibold">+₹800/day</p>
+                    </div>
+
+                    <div class="gear-item p-4 text-center" onclick="toggleGear(this, 400)" data-price="400">
+                        <div class="gear-check"><i class="bi bi-check text-[#D90429] text-xs font-semibold"></i></div>
+                        <i class="bi bi-geo-fill text-3xl text-gray-600 mb-3 block"></i>
+                        <h4 class="text-xs font-semibold uppercase tracking-tight text-black mb-1">GPS Mount Kit</h4>
+                        <p class="text-[10px] text-gray-400 font-semibold">+₹400/day</p>
+                    </div>
+
+                    <div class="gear-item p-4 text-center" onclick="toggleGear(this, 600)" data-price="600">
+                        <div class="gear-check"><i class="bi bi-check text-[#D90429] text-xs font-semibold"></i></div>
+                        <i class="bi bi-bag-fill text-3xl text-gray-600 mb-3 block"></i>
+                        <h4 class="text-xs font-semibold uppercase tracking-tight text-black mb-1">Tail Bag 35L</h4>
+                        <p class="text-[10px] text-gray-400 font-semibold">+₹600/day</p>
+                    </div>
+
+                    <div class="gear-item p-4 text-center" onclick="toggleGear(this, 500)" data-price="500">
+                        <div class="gear-check"><i class="bi bi-check text-[#D90429] text-xs font-semibold"></i></div>
+                        <i class="bi bi-phone-fill text-3xl text-gray-600 mb-3 block"></i>
+                        <h4 class="text-xs font-semibold uppercase tracking-tight text-black mb-1">Phone Mount + USB</h4>
+                        <p class="text-[10px] text-gray-400 font-semibold">+₹500/day</p>
+                    </div>
+
+                    <div class="gear-item p-4 text-center" onclick="toggleGear(this, 1200)" data-price="1200">
+                        <div class="gear-check"><i class="bi bi-check text-[#D90429] text-xs font-black"></i></div>
+                        <i class="bi bi-shield-shaded text-3xl text-gray-600 mb-3 block"></i>
+                        <h4 class="text-xs font-black uppercase tracking-tight text-black mb-1">Full Gear Set</h4>
+                        <p class="text-[10px] text-gray-400 font-bold">+₹1,200/day</p>
+                    </div>
+
+                    <div class="gear-item p-4 text-center" onclick="toggleGear(this, 300)" data-price="300">
+                        <div class="gear-check"><i class="bi bi-check text-[#D90429] text-xs font-black"></i></div>
+                        <i class="bi bi-cup-hot-fill text-3xl text-gray-600 mb-3 block"></i>
+                        <h4 class="text-xs font-black uppercase tracking-tight text-black mb-1">Thermos Flask Kit</h4>
+                        <p class="text-[10px] text-gray-400 font-bold">+₹300/day</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         HOW IT WORKS — RING STEPS
+    ═══════════════════════════════════════════════ -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+                <!-- Left: image collage -->
+                <div class="fade-up">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="images/bg1.avif" alt="Rental" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <div class="aspect-square overflow-hidden">
+                                <img src="images/bg2.avif" alt="Rental" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div class="aspect-square bg-[#D90429] flex items-center justify-center p-6">
+                                <div class="text-center">
+                                    <p class="text-white text-4xl font-black leading-none">12</p>
+                                    <p class="text-red-200 text-[9px] font-black uppercase tracking-widest mt-1">Bikes Ready</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: steps -->
+                <div class="fade-up" style="transition-delay:.12s">
+                    <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-black text-xs mb-4">No Complexity</h3>
+                    <h2 class="text-black text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-12">
+                        HOW RENTAL<br><span class="text-[#D90429]">WORKS.</span>
+                    </h2>
+
+                    <div>
+                        <div class="ring-step">
+                            <div class="ring-num">01</div>
+                            <div>
+                                <h4 class="text-black text-lg font-black uppercase tracking-tight mb-1">Pick Your Bike & Dates</h4>
+                                <p class="text-gray-500 text-sm font-semibold leading-relaxed">Browse the fleet above or use the calculator. Decide your bike, plan type, and add-ons. Takes 2 minutes.</p>
+                            </div>
+                        </div>
+                        <div class="ring-step">
+                            <div class="ring-num">02</div>
+                            <div>
+                                <h4 class="text-black text-lg font-black uppercase tracking-tight mb-1">Submit Your Details</h4>
+                                <p class="text-gray-500 text-sm font-semibold leading-relaxed">Fill in the contact form with your license number, ride experience, and preferred pickup date. We verify within 24 hours.</p>
+                            </div>
+                        </div>
+                        <div class="ring-step">
+                            <div class="ring-num">03</div>
+                            <div>
+                                <h4 class="text-black text-lg font-black uppercase tracking-tight mb-1">Pay 30% Deposit</h4>
+                                <p class="text-gray-500 text-sm font-semibold leading-relaxed">Secure your slot with a 30% deposit via UPI, bank transfer, or card. Confirmation sent immediately.</p>
+                            </div>
+                        </div>
+                        <div class="ring-step">
+                            <div class="ring-num">04</div>
+                            <div>
+                                <h4 class="text-black text-lg font-black uppercase tracking-tight mb-1">Pickup & Pre-Ride Check</h4>
+                                <p class="text-gray-500 text-sm font-semibold leading-relaxed">Arrive at our Chennai base. Full inspection walkthrough with our mechanic. Sign the handover doc. Settle balance.</p>
+                            </div>
+                        </div>
+                        <div class="ring-step">
+                            <div class="ring-num">05</div>
+                            <div>
+                                <h4 class="text-black text-lg font-black uppercase tracking-tight mb-1">Ride. Return. Repeat.</h4>
+                                <p class="text-gray-500 text-sm font-semibold leading-relaxed">Return the bike to Chennai (or an agreed drop point for long routes). Deposit deducted for any damage — otherwise fully refunded.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <div id="footer"></div>
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Poppins','ui-sans-serif','system-ui'] } } }
+        }
+
+
+        // ── Scroll Fade-in ───────────────────────────
+        const observer = new IntersectionObserver(entries=>{
+            entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+        },{ threshold:0.08 });
+        document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+
+
+        // ── Gear Add-on Toggle ───────────────────────
+        function toggleGear(el, price) {
+            el.classList.toggle('selected');
+            updateAddonTotal();
+        }
+
+        function updateAddonTotal() {
+            let total = 0;
+            document.querySelectorAll('.gear-item.selected').forEach(el=>{
+                total += parseInt(el.dataset.price);
+            });
+            document.getElementById('addon-total').textContent = '₹' + total.toLocaleString('en-IN');
+        }
+
+        // ── Cost Calculator ──────────────────────────
+        function calcTotal() {
+            const bikeRate = parseFloat(document.getElementById('calc-bike').value) || 0;
+            const days     = parseFloat(document.getElementById('calc-days').value)  || 0;
+            const discount = parseFloat(document.getElementById('calc-plan').value)  || 1;
+            const addons   = parseFloat(document.getElementById('calc-addons').value)|| 0;
+
+            if(bikeRate === 0 || days === 0){
+                document.getElementById('calc-result').textContent  = '₹ —';
+                document.getElementById('calc-deposit').textContent = '₹ —';
+                return;
+            }
+
+            const total   = Math.round((bikeRate * discount + addons) * days);
+            const deposit = Math.round(total * 0.3);
+
+            document.getElementById('calc-result').textContent  = '₹' + total.toLocaleString('en-IN');
+            document.getElementById('calc-deposit').textContent = '₹' + deposit.toLocaleString('en-IN');
+        }
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+</html>

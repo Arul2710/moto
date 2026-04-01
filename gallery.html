@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* RTL */
+        .rtl {
+            direction: rtl;
+        }
+
+        [dir="rtl"] .title {
+            margin-right: 20px !important;
+        }
+
+        /* THEME TOGGLE */
+        :root {
+            --home-bg: #ffffff;
+            --text-color: #111111;
+        }
+
+        [data-theme="dark"] {
+            --home-bg: #000000;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--home-bg) !important;
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+
+        [data-theme="dark"] body,
+        [data-theme="dark"] p,
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4,
+        [data-theme="dark"] h5,
+        [data-theme="dark"] h6,
+        [data-theme="dark"] span,
+        [data-theme="dark"] li,
+        [data-theme="dark"] a,
+        [data-theme="dark"] label,
+        [data-theme="dark"] small,
+        [data-theme="dark"] strong {
+            color: #ffffff !important;
+        }
+        @media (max-width:770px){
+            .image{
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- navbar -->
+    <div id="navbar"></div>
+
+    <!-- HERO BANNER -->
+<section class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+    
+    <div class="absolute inset-0 z-0 group">
+        <img src="images/bg5.avif" 
+             alt="Redline Moto Gallery" 
+             class="w-full h-full object-cover opacity-70 transition-all duration-1000 scale-110 group-hover:scale-100 group-hover:opacity-50">
+        
+        <div class="absolute inset-0 bg-[radial-gradient(circle,transparent_20%,rgba(0,0,0,0.8)_100%)]"></div>
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6 max-w-5xl">
+        
+        <div class="inline-block px-4 py-1.5 border border-[#D90429] mb-8 transform -skew-x-12 bg-[#D90429]/10">
+            <span class="text-white text-[10px] font-semibold uppercase tracking-[0.5em] italic">
+                Exclusive Visual Archive
+            </span>
+        </div>
+
+        <h1 class="text-6xl md:text-9xl font-semibold text-white uppercase tracking-tighter leading-none mb-4">
+            THE <span class="text-[#D90429]">VAULT.</span>
+        </h1>
+
+        <p class="text-gray-200 text-sm md:text-lg font-semibold uppercase tracking-[0.3em] max-w-3xl mx-auto mb-12 leading-tight">
+            2.1 Million Kilometers of <span class="text-[#D90429]">Dust, Mud, and Glory</span> captured in high definition.
+        </p>
+
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+            <a href="gallery.html" class="btn1 px-12 py-5 bg-[#D90429] text-white font-semibold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-white hover:text-black hover:shadow-[0_0_40px_rgba(217,4,41,0.6)] transform hover:-translate-y-2 active:scale-95">
+                View All Frames
+            </a>
+            <a href="contact.html" class="btn1 px-12 py-5 border-2 border-white text-white font-semibold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-white hover:text-black transform hover:-translate-y-2 active:scale-95">
+                Book Expedition
+            </a>
+        </div>
+    </div>
+
+</section>
+<!-- SECTION1 -->
+ <section class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="mb-16 text-center">
+            <h2 class="text-5xl md:text-7xl font-semibold uppercase tracking-tighter text-black leading-none">
+                THE <span class="text-[#D90429]">GALLERY.</span>
+            </h2>
+            <p class="text-gray-400 font-semibold uppercase tracking-[0.4em] text-[10px] mt-4">12 Frames of Raw Adrenaline</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/bike6.avif" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        THE <span class="text-[#D90429]">PASS</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img1.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        IRON <span class="text-[#D90429]">CORE</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img4.avif" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        DUST <span class="text-[#D90429]">TRAIL</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img2.webp" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        BURNING <span class="text-[#D90429]">SUN</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/bg1.avif" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        WOLF <span class="text-[#D90429]">PACK</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/bg2.avif" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        STEALTH <span class="text-[#D90429]">GEAR</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/bg3.jpg" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        THE <span class="text-[#D90429]">PEAK</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/bg4.avif" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        MUD <span class="text-[#D90429]">RUN</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img8.jpg" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        NIGHT <span class="text-[#D90429]">OPS</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img12.avif" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        DUNE <span class="text-[#D90429]">DRIFT</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img9.jpg" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        FIELD <span class="text-[#D90429]">KIT</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-square overflow-hidden bg-black cursor-pointer shadow-lg">
+                <img src="images/img10.jpg" class="absolute inset-0 w-full h-full object-cover transition-all duration-700  group-hover:scale-110 group-hover:opacity-40 group-hover:blur-[2px]">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4">
+                    <h4 class="text-white text-3xl md:text-4xl font-semibold uppercase italic tracking-tighter transition-all duration-500 group-hover:scale-125 group-hover:text-white drop-shadow-2xl">
+                        FULL <span class="text-[#D90429]">SEND</span>
+                    </h4>
+                    <div class="h-[2px] w-0 bg-[#D90429] transition-all duration-500 group-hover:w-20 mt-2"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes scrollLine {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(200%); }
+    }
+    .animate-scrollLine {
+        animation: scrollLine 2s ease-in-out infinite;
+    }
+</style>
+        <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+                    },
+                },
+            },
+        }
+        lucide.createIcons();
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home1 - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* RTL */
+        .rtl {
+            direction: rtl;
+        }
+
+        [dir="rtl"] .title {
+            margin-right: 20px !important;
+        }
+
+        /* THEME TOGGLE */
+        :root {
+            --home-bg: #ffffff;
+            --text-color: #111111;
+        }
+
+        [data-theme="dark"] {
+            --home-bg: #000000;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--home-bg) !important;
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+
+        [data-theme="dark"] body,
+        [data-theme="dark"] p,
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4,
+        [data-theme="dark"] h5,
+        [data-theme="dark"] h6,
+        [data-theme="dark"] span,
+        [data-theme="dark"] li,
+        [data-theme="dark"] a,
+        [data-theme="dark"] label,
+        [data-theme="dark"] small,
+        [data-theme="dark"] strong {
+            color: #ffffff !important;
+        }
+        @media (max-width:770px){
+            .image{
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- navbar -->
+    <div id="navbar"></div>
+
+    <!-- HERO BANNER -->
+    <section class="relative w-full min-h-screen flex items-center bg-white overflow-hidden">
+
+        <div class="max-w-7xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            <div class="relative z-10 order-2 lg:order-1">
+
+                <h1
+                    class="italic text-black text-5xl sm:text-5xl md:text-7xl font-semibold uppercase tracking-tighter leading-[0.9] mt-4">
+                    UNLEASH THE <br>
+                    <span class="text-[#D90429]">REDLINE.</span>
+                </h1>
+
+                <p class="mt-8 text-gray-600 text-base md:text-xl max-w-lg leading-relaxed font-semibold">
+                    Premium multi-day motorcycle tours through the world's most
+                    rugged landscapes. Engineered for the bold, built for the dirt.
+                </p>
+
+                <div class="mt-10 flex flex-col sm:flex-row gap-4">
+                    <a href="tour.html"
+                        class="px-10 py-4 bg-[#D90429] text-white font-bold uppercase tracking-widest text-sm text-center transition hover:bg-black">
+                        Book Your Tour
+                    </a>
+
+                    <a href="rental.html"
+                        class="px-10 py-4 border-2 border-black text-black font-bold uppercase tracking-widest text-sm text-center transition hover:bg-[#D90429] hover:border-[#D90429] hover:text-white">
+                        View The Fleet
+                    </a>
+                </div>
+
+                <div class="mt-16 flex gap-12 pl-6">
+                    <div>
+                        <h2 class="text-black text-3xl font-semibold leading-none">15+</h2>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold mt-1">Global Routes</p>
+                    </div>
+                    <div>
+                        <h2 class="text-black text-3xl font-semibold leading-none">100%</h2>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold mt-1">Safety Record</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative order-1 lg:order-2 h-[40vh] lg:h-[70vh] w-full">
+
+                <img src="images/bg1.avif" alt="Adventure Motorcycle"
+                    class="image relative z-10 w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500 shadow-2xl" />
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- SECTION1 -->
+    <section id="tours" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col items-center text-center mb-20">
+
+
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4">
+                    Choose Your Battleground
+                </h3>
+
+                <h2
+                    class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none max-w-4xl">
+                    FEATURED <span class="text-[#D90429]">EXPEDITIONS.</span>
+                </h2>
+
+                <p class="mt-6 text-gray-500 text-sm md:text-base font-semibold uppercase tracking-widest max-w-2xl">
+                    Curated multi-day journeys across the most demanding terrains on earth.
+                    Select your difficulty and start the engine.
+                </p>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-100 mb-6">
+                        <img src="images/img1.webp" alt="Himalayan Tour"
+                            class="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-110" />
+                        <div
+                            class="absolute top-0 left-0 bg-[#D90429] text-white px-5 py-2 text-[10px] font-black uppercase tracking-widest">
+                            14 Days
+                        </div>
+                    </div>
+                    <h3
+                        class=" text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-[#D90429] transition-colors">
+                        The High Himalaya
+                    </h3>
+                    <p class="text-gray-400 text-[11px] mt-2 font-semibold uppercase tracking-[0.1em]">Leh • Manali •
+                        Khardung La</p>
+                    <div class="mt-5 flex items-center justify-between border-t-2 border-black pt-4">
+                        <span class="text-black font-semibold text-xl">₹1,45,000</span>
+                        <span
+                            class="btn text-[10px] font-semibold uppercase tracking-widest bg-gray-100 px-2 py-1 text-gray-600">Intermediate</span>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-100 mb-6">
+                        <img src="images/img2.webp" alt="Rajasthan Tour"
+                            class="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-110" />
+                        <div
+                            class="absolute top-0 left-0 bg-[#D90429] text-white px-5 py-2 text-[10px] font-black uppercase tracking-widest">
+                            07 Days
+                        </div>
+                    </div>
+                    <h3
+                        class="text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-[#D90429] transition-colors">
+                        Desert Rally Raid
+                    </h3>
+                    <p class="text-gray-400 text-[11px] mt-2 font-semibold uppercase tracking-[0.1em]">Jaisalmer • Thar
+                        Desert</p>
+                    <div class="mt-5 flex items-center justify-between border-t-2 border-black pt-4">
+                        <span class="text-black font-semibold text-xl">₹85,000</span>
+                        <span
+                            class="text-[10px] font-semibold uppercase tracking-widest bg-black px-2 py-1 text-white">Expert
+                            Only</span>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-gray-100 mb-6">
+                        <img src="images/img3.jpg" alt="Western Ghats"
+                            class="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-110" />
+                        <div
+                            class="absolute top-0 left-0 bg-[#D90429] text-white px-5 py-2 text-[10px] font-black uppercase tracking-widest">
+                            05 Days
+                        </div>
+                    </div>
+                    <h3
+                        class="text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-[#D90429] transition-colors">
+                        Coastal Jungle Run
+                    </h3>
+                    <p class="text-gray-400 text-[11px] mt-2 font-semibold uppercase tracking-[0.1em]">Goa • Gokarna •
+                        Munnar</p>
+                    <div class="mt-5 flex items-center justify-between border-t-2 border-black pt-4">
+                        <span class="text-black font-semibold text-xl">₹55,000</span>
+                        <span
+                            class="btn text-[10px] font-semibold uppercase tracking-widest bg-gray-100 px-2 py-1 text-gray-600">Beginner</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-20 flex justify-center">
+                <a href="tour.html"
+                    class="px-12 py-4 border-2 border-black text-black font-black uppercase tracking-widest text-xs hover:bg-[#D90429] hover:border-[#D90429] hover:text-white transition-all duration-300">
+                    Browse All Adventures
+                </a>
+            </div>
+
+        </div>
+    </section>
+    <!-- SECTION2 -->
+    <section id="requirements" class="py-24 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <div class="flex flex-col items-center mb-20">
+
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4">
+                    Ready for the Trail?
+                </h3>
+
+                <h2
+                    class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none max-w-4xl">
+                    MISSION <span class="text-[#D90429]">CRITICAL.</span>
+                </h2>
+
+                <p class="mt-6 text-gray-500 text-sm md:text-base font-semibold uppercase tracking-widest max-w-2xl">
+                    Adventure riding requires more than just a bike. Ensure you meet our
+                    standards before booking your expedition.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+
+                <div class="p-10 border-2 border-black group hover:bg-black transition-all duration-300 rounded-xl">
+                    <div class="mb-6 text-[#D90429] group-hover:text-white transition-colors">
+                        <i class="bi bi-card-checklist text-4xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-white mb-4">
+                        Legal & Permits
+                    </h4>
+                    <p class="text-gray-600 group-hover:text-gray-400 text-sm leading-relaxed font-bold">
+                        A valid international motorcycle endorsement is mandatory. We handle all inner-line permits and
+                        border crossings, but your paperwork must be current.
+                    </p>
+                </div>
+
+                <div class="p-10 border-2 border-black group hover:bg-black transition-all duration-300 rounded-xl">
+                    <div class="mb-6 text-[#D90429] group-hover:text-white transition-colors">
+                        <i class="bi bi-shield-shaded text-4xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-white mb-4">
+                        Protection Gear
+                    </h4>
+                    <p class="text-gray-600 group-hover:text-gray-400 text-sm leading-relaxed font-bold">
+                       A valid international motorcycle endorsement is mandatory. We handle all inner-line permits and
+                        border crossings, but your paperwork must be current.
+                    </p>
+                </div>
+
+                <div class="p-10 border-2 border-black group hover:bg-black transition-all duration-300 rounded-xl">
+                    <div class="mb-6 text-[#D90429] group-hover:text-white transition-colors">
+                        <i class="bi bi-heart-pulse text-4xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-white mb-4">
+                        Physical Grit
+                    </h4>
+                    <p class="text-gray-600 group-hover:text-gray-400 text-sm leading-relaxed font-bold">
+                        A valid international motorcycle endorsement is mandatory. We handle all inner-line permits and
+                        border crossings, but your paperwork must be current.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="mt-16">
+                <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">
+                    Have questions about your skill level?
+                    <a href="contact.html"
+                        class="text-black border-b border-black ml-2 hover:text-[#D90429] hover:border-[#D90429] transition-all">
+                        Ask a Lead Guide
+                    </a>
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <!-- SECTION3 -->
+    <section id="rentals" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <div class="flex flex-col items-center mb-20">
+            
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4">
+                    Engineered for the Dirt
+                </h3>
+
+                <h2
+                    class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none max-w-4xl">
+                    THE <span class="text-[#D90429]">FLEET.</span>
+                </h2>
+
+                <p class="mt-6 text-gray-500 text-sm md:text-base font-semibold uppercase tracking-widest max-w-2xl">
+                    Our machines are meticulously maintained and modified for
+                    hard-enduro and long-distance adventure touring.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                <div class="group border-2 border-black p-8 transition-all duration-300 hover:border-[#D90429] rounded-xl">
+                    <div class="relative w-full h-64 flex items-center justify-center overflow-hidden mb-8 bg-white">
+                        <img src="images/bike1.jpg" alt="BMW R1250 GS"
+                            class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+
+                    <div class="flex justify-between items-end border-b-4 border-black pb-4 mb-6">
+                        <div class="text-left">
+                            <h4 class="text-3xl font-semibold uppercase tracking-tighter">BMW R1250 GS</h4>
+                            <p class="text-[#D90429] font-semibold text-xs uppercase tracking-widest mt-1">The Heavyweight
+                                King</p>
+                        </div>
+                        <span class="text-2xl font-semibold">₹8,500<span class="text-xs text-gray-400">/day</span></span>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="card bg-gray-50 p-3">
+                            <p class="text-[10px] font-black text-gray-400 uppercase">Engine</p>
+                            <p class="text-sm font-black">1250cc</p>
+                        </div>
+                        <div class="card bg-gray-50 p-3">
+                            <p class="text-[10px] font-black text-gray-400 uppercase">Weight</p>
+                            <p class="text-sm font-black">249kg</p>
+                        </div>
+                        <div class="card bg-gray-50 p-3">
+                            <p class="text-[10px] font-black text-gray-400 uppercase">Power</p>
+                            <p class="text-sm font-black">136hp</p>
+                        </div>
+                    </div>
+
+                    <button onclick="window.location.href='rental.html'"
+                        class="w-full mt-8 py-4 bg-black text-white font-black uppercase tracking-widest text-sm transition-colors hover:bg-[#D90429]">
+                        Book This Bike
+                    </button>
+                </div>
+
+                <div class="group border-2 border-black p-8 transition-all duration-300 hover:border-[#D90429] rounded-xl">
+                    <div class="relative w-full h-64 flex items-center justify-center overflow-hidden mb-8 bg-white">
+                        <img src="images/bike2.webp" alt="KTM 890 Adventure"
+                            class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+
+                    <div class="flex justify-between items-end border-b-4 border-black pb-4 mb-6">
+                        <div class="text-left">
+                            <h4 class="text-3xl font-semibold uppercase tracking-tighter">KTM 890 R</h4>
+                            <p class="text-[#D90429] font-semibold text-xs uppercase tracking-widest mt-1">Off-Road
+                                Specialist</p>
+                        </div>
+                        <span class="text-2xl font-semibold">₹6,500<span class="text-xs text-gray-400">/day</span></span>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="card bg-gray-50 p-3">
+                            <p class="text-[10px] font-black text-gray-400 uppercase">Engine</p>
+                            <p class="text-sm font-black">889cc</p>
+                        </div>
+                        <div class="card bg-gray-50 p-3">
+                            <p class="text-[10px] font-black text-gray-400 uppercase">Weight</p>
+                            <p class="text-sm font-black">196kg</p>
+                        </div>
+                        <div class="card bg-gray-50 p-3">
+                            <p class="text-[10px] font-black text-gray-400 uppercase">Power</p>
+                            <p class="text-sm font-black">105hp</p>
+                        </div>
+                    </div>
+
+                    <button onclick="window.location.href='rental.html'"
+                        class="w-full mt-8 py-4 bg-black text-white font-black uppercase tracking-widest text-sm transition-colors hover:bg-[#D90429]">
+                        Book This Bike
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- SECTION4 -->
+    <section id="reviews" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <div class="flex flex-col items-center mb-20">
+
+                <h3 class="text-[#D90429] uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4">
+                    Straight from the Trail
+                </h3>
+
+                <h2
+                    class="text-black text-4xl md:text-6xl font-semibold uppercase tracking-tighter leading-none max-w-4xl">
+                    RIDER <span class="text-[#D90429]">STORIES.</span>
+                </h2>
+
+                <p class="mt-6 text-gray-500 text-sm md:text-base font-semibold uppercase tracking-widest max-w-2xl">
+                    Join the community of explorers who have pushed their limits
+                    with Redline Moto.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+
+                <div
+                    class="card bg-white p-10 border-b-8 border-black hover:border-[#D90429] transition-all duration-300 shadow-sm group ">
+                    <div class="text-[#D90429] text-5xl font-black mb-6 leading-none">"</div>
+                    <p class="text-black font-bold text-lg leading-snug mb-8">
+                        The Himalayan Crossing was the most brutal and beautiful thing I've ever done. The bikes were
+                        flawlessly maintained.
+                    </p>
+                    <div class="flex items-center gap-4 border-t border-gray-100 pt-6">
+                        <div
+                            class="w-12 h-12 bg-black rounded-none flex items-center justify-center text-white font-black">
+                            AR</div>
+                    <div>
+                            <h4 class="text-sm font-semibold uppercase tracking-widest">Arjun Raghav</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase">BMW R1250 GS Rider</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="card bg-white p-10 border-b-8 border-black hover:border-[#D90429] transition-all duration-300 shadow-sm group">
+                    <div class="text-[#D90429] text-5xl font-black mb-6 leading-none">"</div>
+                    <p class="text-black font-bold text-lg leading-snug mb-8">
+                        The Himalayan Crossing was the most brutal and beautiful thing I've ever done. The bikes were
+                        flawlessly maintained. </p>
+                    <div class="flex items-center gap-4 border-t border-gray-100 pt-6">
+                        <div
+                            class="w-12 h-12 bg-black rounded-none flex items-center justify-center text-white font-black">
+                            SM</div>
+                        <div>
+                            <h4 class="text-sm font-semibold uppercase tracking-widest">Sarah Miller</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase">KTM 890 R Rider</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="card bg-white p-10 border-b-8 border-black hover:border-[#D90429] transition-all duration-300 shadow-sm group">
+                    <div class="text-[#D90429] text-5xl font-black mb-6 leading-none">"</div>
+                    <p class="text-black font-bold text-lg leading-snug mb-8">
+                        The Himalayan Crossing was the most brutal and beautiful thing I've ever done. The bikes were
+                        flawlessly maintained. </p>
+                    <div class="flex items-center gap-4 border-t border-gray-100 pt-6">
+                        <div
+                            class="w-12 h-12 bg-black rounded-none flex items-center justify-center text-white font-black">
+                            VK</div>
+                        <div>
+                            <h4 class="text-sm font-semibold uppercase tracking-widest">Vikram Khanna</h4>
+                            <p class="text-[10px] text-[#D90429] font-semibold uppercase">Himalayan 450 Rider</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-24 pt-12 border-t border-gray-200">
+                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 mb-8">Trusted Partners &
+                    Sponsors</p>
+                <div class="flex flex-wrap justify-center items-center gap-12 opacity-30 grayscale contrast-125">
+                    <span class="text-2xl font-semibold uppercase">Castrol</span>
+                    <span class="text-2xl font-semibold uppercase">Metzeler</span>
+                    <span class="text-2xl font-semibold uppercase">Akrapovic</span>
+                    <span class="text-2xl font-semibold uppercase">Gopro</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- SECTION5 -->
+     <section id="contact" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border-2 border-black">
+      
+      <div class="card p-10 md:p-16 bg-white flex flex-col justify-center">
+        
+        <h2 class="text-black text-5xl md:text-7xl font-semibold uppercase tracking-tighter leading-none mb-16">
+          BASE <br> <span class="text-[#D90429]">CAMP.</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+          
+          <div class=" pl-6">
+            <p class="text-[10px] font-semibold text-[#D90429] uppercase tracking-[0.3em] mb-3">Status</p>
+            <h4 class="text-xl font-semibold text-black">Active / Open</h4>
+            <p class="text-[11px] font-semibold text-gray-400 mt-2">09:00 - 19:00 IST</p>
+          </div>
+
+          <div class=" pl-6">
+            <p class="text-[10px] font-semibold text-[#D90429] uppercase tracking-[0.3em] mb-3">Coordinates</p>
+            <h4 class="text-xl font-semibold text-black">Chennai, India</h4>
+            <p class="text-[11px] font-semibold text-gray-400 mt-2">13.0827° N, 80.2707° E</p>
+          </div>
+
+          <div class=" pl-6">
+            <p class="text-[10px] font-semibold text-[#D90429] uppercase tracking-[0.3em] mb-3">Comms Line</p>
+            <h4 class="text-xl font-semibold text-black">+91 98765 43210</h4>
+            <p class="text-[11px] font-semibold text-gray-400 mt-2">Voice & WhatsApp</p>
+          </div>
+
+          <div class="pl-6">
+            <p class="text-[10px] font-semibold text-[#D90429] uppercase tracking-[0.3em] mb-3">Intelligence</p>
+            <h4 class="text-xl font-semibold text-black">ride@redline.com</h4>
+            <p class="text-[11px] font-semibold text-gray-400 mt-2">24hr Response</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="relative min-h-[500px] bg-gray-100 flex items-center justify-center overflow-hidden">
+        <img 
+          src="images/img4.avif" 
+          alt="Redline Workshop" 
+          class="w-full h-full object-cover transition-all duration-1000"
+        />
+    
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- SECTION6 -->
+ <section class="w-full bg-black py-16 border-y-4 border-[#D90429]">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+    
+    <div class="flex items-center gap-6">
+      <div class="relative flex h-4 w-4">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D90429] opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-4 w-4 bg-[#D90429]"></span>
+      </div>
+      
+      <div>
+        <h2 class="text-white text-3xl md:text-5xl font-semibold uppercase tracking-tighter leading-none">
+          EXPEDITION STATUS: <span class="text-[#D90429]">OPEN</span>
+        </h2>
+        <p class="text-gray-400 font-bold uppercase tracking-[0.3em] text-[10px] mt-2">
+          Secure your slot for the 2026 Himalayan Crossing
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-10">
+      <div class="hidden lg:block h-12 w-px bg-gray-800"></div>
+      
+      <a href="contact.html" class="group flex items-center gap-4">
+        <span class="text-white font-black uppercase tracking-[0.4em] text-xs group-hover:text-[#D90429] transition-colors">
+          Initialize Booking
+        </span>
+        <div class="w-12 h-12 border-2 border-white flex items-center justify-center group-hover:bg-[#D90429] group-hover:border-[#D90429] transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+                    },
+                },
+            },
+        }
+        lucide.createIcons();
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

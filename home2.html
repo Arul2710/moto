@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home2 - Redline Moto</title>
+    <link rel="icon" href="images/logo.jpeg">
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* RTL */
+        .rtl {
+            direction: rtl;
+        }
+
+        [dir="rtl"] .title {
+            margin-right: 20px !important;
+        }
+
+        /* THEME TOGGLE */
+        :root {
+            --home-bg: #ffffff;
+            --text-color: #111111;
+        }
+
+        [data-theme="dark"] {
+            --home-bg: #000000;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--home-bg) !important;
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        [data-theme="dark"] section,
+        [data-theme="dark"] .card {
+            background-color: #000000 !important;
+        }
+
+        [data-theme="dark"] .btn,
+        [data-theme="dark"] .btn1:hover {
+            color: #000000 !important;
+        }
+
+        [data-theme="dark"] body,
+        [data-theme="dark"] p,
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4,
+        [data-theme="dark"] h5,
+        [data-theme="dark"] h6,
+        [data-theme="dark"] span,
+        [data-theme="dark"] li,
+        [data-theme="dark"] a,
+        [data-theme="dark"] label,
+        [data-theme="dark"] small,
+        [data-theme="dark"] strong {
+            color: #ffffff !important;
+        }
+        @media (max-width:770px){
+            .image{
+                margin-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- navbar -->
+    <div id="navbar"></div>
+
+    <!-- HERO BANNER -->
+<section class="relative w-full h-screen flex items-center justify-center bg-black overflow-hidden">
+  
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="images/bg2.avif" 
+      alt="Motorcycle Expedition" 
+      class="w-full h-full object-cover grayscale opacity-60 contrast-125"
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+
+
+    <h1 class="text-white text-5xl md:text-8xl font-semibold uppercase tracking-tighter leading-[0.85] mb-8">
+      ENGINEERED <br>
+      FOR THE <span class="text-[#D90429]">WILD.</span>
+    </h1>
+
+    <p class="text-gray-200 font-semibold uppercase tracking-[0.3em] text-xs md:text-sm max-w-2xl mx-auto leading-loose mb-12">
+      Professional Grade Motorcycle Expeditions. <br>
+      High Altitude. Hard Enduro. No Compromise.
+    </p>
+
+    <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 pt-10 border-t border-white/20">
+      <a href="#tours" class="text-[10px] font-semibold uppercase tracking-[0.5em] text-white hover:text-[#D90429] transition-all border-b-2 border-transparent hover:border-[#D90429] pb-1">
+        Expeditions
+      </a>
+      <a href="#fleet" class="text-[10px] font-semibold uppercase tracking-[0.5em] text-white hover:text-[#D90429] transition-all border-b-2 border-transparent hover:border-[#D90429] pb-1">
+        The Fleet
+      </a>
+      <a href="#contact" class="text-[10px] font-semibold uppercase tracking-[0.5em] text-white hover:text-[#D90429] transition-all border-b-2 border-transparent hover:border-[#D90429] pb-1">
+        Base Camp
+      </a>
+    </div>
+
+  </div>
+
+</section>
+<!-- SECTION1 -->
+ <section id="fleet-premium" class="py-24 bg-white border-t-2 border-black">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-l-2 border-black">
+      
+      <div class="group border-r-2 border-b-2 border-black p-8 md:p-12 hover:bg-black transition-all duration-500">
+        <div class="flex flex-col h-full">
+          <div class="flex justify-between items-start mb-8">
+            <h3 class="text-4xl font-semibold text-black group-hover:text-white uppercase tracking-tighter leading-none">
+              TRIUMPH <br> <span class="text-[#D90429]">TIGER 900</span> <br> RALLY PRO
+            </h3>
+          </div>
+          
+          <div class="relative w-full aspect-video mb-8 overflow-hidden bg-gray-100">
+            <img src="images/bike3.jpg" alt="Triumph Tiger 900 Rally Pro" class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700">
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-6 gap-x-4 mt-auto">
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Powerplant</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">888cc Triple / 108 PS</p>
+            </div>
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Suspension</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">Showa / 240mm Travel</p>
+            </div>
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Tech</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">6 Ride Modes / Quickshifter</p>
+            </div>
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-[#D90429] uppercase tracking-widest">Rental Rate</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">₹9,500 / Day</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group border-r-2 border-b-2 border-black p-8 md:p-12 hover:bg-black transition-all duration-500">
+        <div class="flex flex-col h-full">
+          <div class="flex justify-between items-start mb-8">
+            <h3 class="text-4xl font-semibold text-black group-hover:text-white uppercase tracking-tighter leading-none">
+              ROYAL ENFIELD <br> <span class="text-[#D90429]">HIMALAYAN</span> <br> 450
+            </h3>
+          </div>
+          
+          <div class="relative w-full aspect-video mb-8 overflow-hidden bg-gray-100">
+            <img src="images/bike4.webp" alt="Royal Enfield Himalayan 450" class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700">
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-6 gap-x-4 mt-auto">
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Engine</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">Sherpa 452 / Liquid Cooled</p>
+            </div>
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Output</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">40 PS / 40 NM Torque</p>
+            </div>
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Features</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">TFT Dash / Google Maps</p>
+            </div>
+            <div class="border-l-2 border-black group-hover:border-[#D90429] pl-4 transition-colors">
+              <p class="text-[9px] font-semibold text-[#D90429] uppercase tracking-widest">Rental Rate</p>
+              <p class="text-sm font-semibold text-black group-hover:text-white uppercase">₹3,500 / Day</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- SECTION2 -->
+
+<section class="bg-zinc-900 py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="mb-16 text-center">
+      <h2 class="text-4xl md:text-5xl font-semibold text-white uppercase tracking-tighter">
+        Featured <span class="text-red-600">Expeditions</span>
+      </h2>
+      <div class="h-1 w-24 bg-red-600 mx-auto mt-4 mb-6"></div> <p class="text-zinc-400 max-w-2xl mx-auto text-lg">
+        Push your limits across the world's most unforgiving terrain. 
+        Guided tours, premium bikes, and memories that last a lifetime.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      
+      <div class="group relative bg-zinc-800 border-2 border-transparent transition-all duration-300 hover:border-red-600 rounded-xl overflow-hidden shadow-2xl">
+        <div class="relative h-72 overflow-hidden">
+          <img src="images/img5.avif" alt="Himalayas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 uppercase tracking-widest shadow-lg">Difficulty: Hard</span>
+        </div>
+        <div class="p-8 text-center">
+          <div class="text-red-500 font-mono text-sm mb-2">4.8 ★★★★★</div>
+          <h3 class="text-2xl font-semibold text-white mb-3">The Himalayan</h3>
+          <p class="text-zinc-400 text-sm mb-8 leading-relaxed">Ride through the end of the world amidst massive glaciers and endless gravel plains.</p>
+          <button onclick="window.location.href='tour.html'" class="w-full py-4 bg-zinc-700 text-white font-semibold uppercase tracking-widest transition-all hover:bg-red-600 active:scale-95">View Route</button>
+        </div>
+      </div>
+
+      <div class="group relative bg-zinc-800 border-2 border-transparent transition-all duration-300 hover:border-red-600 rounded-xl overflow-hidden shadow-2xl">
+        <div class="relative h-72 overflow-hidden">
+          <img src="images/img6.jpg" alt="Patagonia" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 uppercase tracking-widest shadow-lg">Limited Spots</span>
+        </div>
+        <div class="p-8 text-center">
+          <div class="text-red-500 font-mono text-sm mb-2">5.0 ★★★★★</div>
+          <h3 class="text-2xl font-semibold text-white mb-3">Patagonian Dust</h3>
+          <p class="text-zinc-400 text-sm mb-8 leading-relaxed">Ride through the end of the world amidst massive glaciers and endless gravel plains.</p>
+          <button onclick="window.location.href='tour.html'" class="w-full py-4 bg-zinc-700 text-white font-bold uppercase tracking-widest transition-all hover:bg-red-600 active:scale-95">View Route</button>
+        </div>
+      </div>
+
+      <div class="group relative bg-zinc-800 border-2 border-transparent transition-all duration-300 hover:border-red-600 rounded-xl overflow-hidden shadow-2xl">
+        <div class="relative h-72 overflow-hidden">
+          <img src="images/img7.avif" alt="Sahara" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 uppercase tracking-widest shadow-lg">Difficulty: Hard</span>
+        </div>
+        <div class="p-8 text-center">
+          <div class="text-red-500 font-mono text-sm mb-2">4.9 ★★★★★</div>
+          <h3 class="text-2xl font-semibold text-white mb-3">Saharan Sands</h3>
+          <p class="text-zinc-400 text-sm mb-8 leading-relaxed">Ride through the end of the world amidst massive glaciers and endless gravel plains.</p>
+          <button onclick="window.location.href='tour.html'" class="w-full py-4 bg-zinc-700 text-white font-bold uppercase tracking-widest transition-all hover:bg-red-600 active:scale-95">View Route</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- SECTION3 -->
+<section class="bg-white py-20 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+    
+    <div class="w-full lg:w-1/2 relative group">
+      <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-red-600"></div>
+      <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-red-600"></div>
+      
+      <div class="overflow-hidden rounded-sm shadow-xl">
+        <img 
+          src="images/bike5.avif" 
+          alt="Adventure Bike Detail" 
+          class="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 space-y-8">
+      <div>
+        <h2 class="text-red-600 font-mono tracking-widest uppercase text-sm mb-2 font-semibold">Built for the Bold</h2>
+        <h3 class="text-4xl md:text-5xl font-semibold text-slate-900 uppercase leading-tight">
+          Why Ride With <span class="text-red-600">Us?</span>
+        </h3>
+      </div>
+
+      <div class="space-y-8">
+        <div class="flex items-start gap-5">
+          <div class="bg-red-600 p-3 rounded-sm shadow-md shadow-red-200">
+            <i class="ri-motorbike-fill text-white text-xl"></i>
+          </div>
+          <div>
+            <h4 class="text-slate-900 font-semibold text-lg uppercase tracking-tight">Pro-Spec Fleet</h4>
+            <p class="text-slate-600 text-sm leading-relaxed mt-1">Late-model KTM and BMW adventure bikes, fully kitted with crash bars and off-road tires.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5">
+          <div class="bg-red-600 p-3 rounded-sm shadow-md shadow-red-200">
+            <i class="ri-map-pin-user-fill text-white text-xl"></i>
+          </div>
+          <div>
+            <h4 class="text-slate-900 font-semibold text-lg uppercase tracking-tight">Lead & Sweep Guides</h4>
+            <p class="text-slate-600 text-sm leading-relaxed mt-1">Expert riders who know the terrain, the culture, and how to fix a bike in the middle of nowhere.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5">
+          <div class="bg-red-600 p-3 rounded-sm shadow-md shadow-red-200">
+            <i class="ri-truck-fill text-white text-xl"></i>
+          </div>
+          <div>
+            <h4 class="text-slate-900 font-semibold text-lg uppercase tracking-tight">Full Chase Support</h4>
+            <p class="text-slate-600 text-sm leading-relaxed mt-1">A 4x4 support vehicle carries your luggage, tools, and medical supplies so you can ride light.</p>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="window.location.href='about.html'" class="mt-4 px-10 py-4 bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-red-600 transition-all duration-300">
+        Our Gear Specs
+      </button>
+    </div>
+
+  </div>
+</section>
+<!-- SECTION4 -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<section class="bg-white py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="text-center mb-20">
+      <h2 class="text-red-600 font-mono tracking-widest uppercase text-sm mb-2 font-semibold italic">The Brotherhood</h2>
+      <h3 class="text-4xl md:text-5xl font-semibold text-slate-900 uppercase tracking-tighter">Elite <span class="text-red-600">Riders</span></h3>
+      <div class="h-1 w-20 bg-red-600 mx-auto mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center">
+      
+      <div class="group relative w-72 h-72 rounded-full overflow-hidden border-4 border-red-600 shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 hover:shadow-red-200">
+        <img src="images/client1.avif" alt="Rider Marcus" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8 text-center opacity-90 group-hover:opacity-100 transition-opacity">
+          <p class="text-white text-xs italic mb-3 leading-snug">"The Himalayan tour was life-changing. Elite support."</p>
+          <h4 class="text-white font-semibold uppercase text-xl tracking-tight">Marcus Vane</h4>
+          <span class="text-red-500 text-[10px] font-semibold uppercase tracking-widest">BMW R1250GS</span>
+        </div>
+      </div>
+
+      <div class="group relative w-72 h-72 rounded-full overflow-hidden border-4 border-red-600 shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 hover:shadow-red-200">
+        <img src="images/client2.avif" alt="Rider Sarah" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8 text-center">
+          <p class="text-white text-xs italic mb-3 leading-snug">"Saharan dunes were a true test of endurance. 10/10."</p>
+          <h4 class="text-white font-semibold uppercase text-xl tracking-tight">Sarah Jenkins</h4>
+          <span class="text-red-500 text-[10px] font-semibold uppercase tracking-widest">KTM 890 ADV</span>
+        </div>
+      </div>
+
+      <div class="group relative w-72 h-72 rounded-full overflow-hidden border-4 border-red-600 shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 hover:shadow-red-200">
+        <img src="images/client3.avif" alt="Rider David" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8 text-center">
+          <p class="text-white text-xs italic mb-3 leading-snug">"Premium bikes and the best trails I've ever ridden."</p>
+          <h4 class="text-white font-semibold uppercase text-xl tracking-tight">David Chen</h4>
+          <span class="text-red-500 text-[10px] font-semibold uppercase tracking-widest">Africa Twin</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- SECTION5 -->
+ <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<section class="bg-white py-24 px-6 overflow-hidden">
+  <div class="max-w-5xl mx-auto">
+    
+    <div class="text-center mb-20">
+      <h2 class="text-red-600 font-mono tracking-widest uppercase text-sm mb-2 font-bold italic font-bold">The Route</h2>
+      <h3 class="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter">Day by <span class="text-red-600">Day</span></h3>
+      <div class="h-1.5 w-20 bg-red-600 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="relative">
+      <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-slate-100">
+        <div class="h-1/3 w-full bg-red-600"></div> </div>
+
+      <div class="relative flex flex-col md:flex-row items-center justify-between mb-20 group">
+        <div class="w-full md:w-[45%] text-center md:text-right">
+          <span class="text-red-600 font-semibold text-5xl opacity-20 group-hover:opacity-100 transition-opacity">01</span>
+          <h4 class="text-2xl font-semibold text-slate-900 uppercase mt-2">Arrival & Gear Check</h4>
+          <p class="text-slate-500 mt-3 text-sm leading-relaxed">Meet the team in Leh. We’ll fit your bike, adjust the suspension, and have a briefing dinner to prep for the ascent.</p>
+        </div>
+        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-red-600 border-4 border-white shadow-xl items-center justify-center z-10">
+          <i class="ri-map-pin-2-fill text-white"></i>
+        </div>
+        <div class="hidden md:block w-[45%]"></div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-center justify-between mb-20 group">
+        <div class="hidden md:block w-[45%]"></div>
+        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-slate-900 border-4 border-white shadow-xl items-center justify-center z-10 group-hover:bg-red-600 transition-colors">
+          <i class="ri-motorbike-fill text-white"></i>
+        </div>
+        <div class="w-full md:w-[45%] text-center md:text-left">
+          <span class="text-red-600 font-semibold text-5xl opacity-20 group-hover:opacity-100 transition-opacity">02</span>
+          <h4 class="text-2xl font-semibold text-slate-900 uppercase mt-2">The High Passes</h4>
+          <p class="text-slate-500 mt-3 text-sm leading-relaxed">Crossing Khardung La at 17,582ft. A technical climb through rock and ice before dropping into the Nubra Valley.</p>
+        </div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-center justify-between group">
+        <div class="w-full md:w-[45%] text-center md:text-right">
+          <span class="text-red-600 font-semibold text-5xl opacity-20 group-hover:opacity-100 transition-opacity">03</span>
+          <h4 class="text-2xl font-semibold text-slate-900 uppercase mt-2">Desert Sand & Rivers</h4>
+          <p class="text-slate-500 mt-3 text-sm leading-relaxed">Off-roading through the cold desert dunes. Multiple river crossings will test your balance and throttle control.</p>
+        </div>
+        <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-slate-900 border-4 border-white shadow-xl items-center justify-center z-10 group-hover:bg-red-600 transition-colors">
+          <i class="ri-flag-2-fill text-white"></i>
+        </div>
+        <div class="hidden md:block w-[45%]"></div>
+      </div>
+
+    </div>
+
+    <div class="mt-20 text-center">
+        <button onclick="window.location.href='about.html'" class="group relative px-12 py-5 bg-red-600 text-white font-black uppercase tracking-widest overflow-hidden transition-all">
+            <span class="relative z-10">Learn More</span>
+            <div class="absolute inset-0 bg-slate-900 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+        </button>
+    </div>
+  </div>
+</section>
+      <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+                    },
+                },
+            },
+        }
+        lucide.createIcons();
+    </script>
+    </script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>
