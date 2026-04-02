@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!footer) return;
 
   footer.innerHTML = `
-<footer class="bg-white text-[#1A1A1A] w-full border-t-2 border-gray-100">
+<footer class="bg-white text-[#1A1A1A] w-full border-t-2 border-white/10">
 
 
   <div class="max-w-7xl mx-auto px-6 py-16">
@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
          </h3>
          <ul class="space-y-3 text-sm font-semibold">
            <li><a href="about.html" class="hover:text-[#D90429] transition">About</a></li>
-           <li><a href="tour" class="hover:text-[#D90429] transition">Tours</a></li>
+           <li><a href="tour.html" class="hover:text-[#D90429] transition">Tours</a></li>
            <li><a href="rental.html" class="hover:text-[#D90429] transition">Rentals</a></li>
-           <li><a href="faq" class="hover:text-[#D90429] transition">FAQs</a></li>
+           <li><a href="faq.html" class="hover:text-[#D90429] transition">FAQs</a></li>
          </ul>
        </div>
 
