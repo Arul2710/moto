@@ -5,3 +5,6 @@
 [data-theme="dark"] footer{
   background-color: #29292a !important;
 }
+[data-theme="dark"] .logo{
+  color: #D90429 !important;
+}
