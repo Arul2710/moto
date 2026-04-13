@@ -198,8 +198,12 @@ body {
 [data-theme="dark"] #mobileMenu i{
   color: white !important;
 }
+[data-theme="dark"] .logo{
+  color: #D90429 !important;
+}
  /* h1{
   color:#FACC15;
 color:#7F1D1D;
  color:#f6e9b4;
 }  */
+
