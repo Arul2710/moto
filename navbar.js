@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Logo -->
     <h1 class="text-2xl">
-      <a href="index.html" class="italic font-semibold">
+      <a href="index.html" class="logo italic font-semibold">
        <span class="text-black"> REDLINE </span> MOTO
       </a>
     </h1>
